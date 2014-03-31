@@ -1,0 +1,36 @@
+---
+
+- name: get current version
+  command: /usr/local/nginx/sbin/nginx -v
+  register: result
+  ignore_errors: True
+  changed_when: False
+
+- name: clone installer
+  git: repo=https://github.com/oohnoitz/nginx-installer.git dest=/tmp/nginx-installer
+  when: result.rc != 0 or result.stderr.split('/')[1] != software.nginx.version
+
+- name: chmod
+  file: path={{ item }} mode=0744
+  with_items:
+    - /tmp/nginx-installer/install-module.sh
+    - /tmp/nginx-installer/install-nginx.sh
+  when: result.rc != 0 or result.stderr.split('/')[1] != software.nginx.version
+
+- name: download modules
+  command: ./install-module.sh {{ item }} chdir=/tmp/nginx-installer
+  with_items:
+    - ngx_cache_purge
+  when: result.rc != 0 or result.stderr.split('/')[1] != software.nginx.version
+
+- name: install
+  command: ./install-nginx.sh {{ software.nginx.version }} chdir=/tmp/nginx-installer
+  when: result.rc != 0 or result.stderr.split('/')[1] != software.nginx.version
+
+- name: mkdir ssl
+  file: path=/usr/local/nginx/conf/ssl state=directory recurse=true
+  when: result.rc != 0 or result.stderr.split('/')[1] != software.nginx.version
+
+- name: generate self-signed ssl
+  command: openssl req -x509 -nodes -days 365 -newkey rsa:4096 -subj '/C=XX/ST= /O= /CN= ' -keyout /usr/local/nginx/conf/ssl/default.key -out /usr/local/nginx/conf/ssl/default.crt
+  when: result.rc != 0 or result.stderr.split('/')[1] != software.nginx.version

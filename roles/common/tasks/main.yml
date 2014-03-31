@@ -1,0 +1,21 @@
+---
+
+- name: upgrade apt packages
+  apt: update_cache=yes
+  apt: upgrade=yes
+
+- name: install apt packages
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - autoconf
+    - build-essential
+    - byobu
+    - git
+    - htop
+    - libpcre3-dev
+    - libssl-dev
+    - locales-all
+    - ltrace
+    - strace
+    - tmux
+    - unzip

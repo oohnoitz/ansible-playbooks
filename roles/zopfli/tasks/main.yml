@@ -1,0 +1,23 @@
+---
+
+- name: check installed
+  command: /usr/local/bin/zopfli -h
+  register: result
+  ignore_errors: True
+  changed_when: False
+
+- name: download
+  get_url: url={{ download.zopfli.url }} dest=/tmp/{{ download.zopfli.url | basename }}
+  when: result.rc != 0
+
+- name: extract
+  unarchive: src=/tmp/{{ download.zopfli.url | basename }} dest=/tmp copy=no
+  when: result.rc != 0
+
+- name: make
+  command: make chdir=/tmp/zopfli-{{ software.zopfli.version }}
+  when: result.rc != 0
+
+- name: install {{ software.zopfli.version }}
+  shell: if [ -f /tmp/zopfli-{{ software.zopfli.version }}/zopfli ]; then cp /tmp/zopfli-{{ software.zopfli.version }}/zopfli /usr/local/bin/zopfli; fi
+  when: result.rc != 0

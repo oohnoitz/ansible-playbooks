@@ -1,0 +1,29 @@
+---
+
+- name: get current version
+  command: /usr/local/bin/convert --version
+  register: result
+  ignore_errors: True
+  changed_when: False
+
+- name: download
+  get_url: url={{ download.imagemagick.url }} dest=/tmp/{{ download.imagemagick.url | basename }}
+  when: result.rc != 0 or result.stdout.split()[2] != software.imagemagick.version
+
+- name: extract
+  unarchive: src=/tmp/{{ download.imagemagick.url | basename }} dest=/tmp copy=no
+  when: result.rc != 0 or result.stdout.split()[2] != software.imagemagick.version
+
+- name: configure
+  command: ./configure chdir=/tmp/ImageMagick-{{ software.imagemagick.version }}
+  when: result.rc != 0 or result.stdout.split()[2] != software.imagemagick.version
+
+- name: make
+  command: make chdir=/tmp/ImageMagick-{{ software.imagemagick.version }}
+  when: result.rc != 0 or result.stdout.split()[2] != software.imagemagick.version
+
+- name: make install {{ software.imagemagick.version }}
+  command: make install chdir=/tmp/ImageMagick-{{ software.imagemagick.version }}
+  notify:
+    - run ldconfig
+  when: result.rc != 0 or result.stdout.split()[2] != software.imagemagick.version

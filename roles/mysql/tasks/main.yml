@@ -1,0 +1,41 @@
+---
+
+- name: get current version
+  command: /usr/local/mysql/bin/mysql -V
+  register: result
+  ignore_errors: True
+  changed_when: False
+
+- name: create user
+  user: name=mysql home=/usr/local/mysql system=yes
+
+- name: install dependencies and packages
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - libaio-dev
+  when: result.rc != 0 or result.stdout.split()[4].rstrip(',') != software.mysql.version
+
+- name: download
+  get_url: url={{ download.mysql.url }} dest=/tmp/{{ software.mysql.basename }}.tar.gz
+  when: result.rc != 0 or result.stdout.split()[4].rstrip(',') != software.mysql.version
+
+- name: extract
+  unarchive: src=/tmp/{{ software.mysql.basename }}.tar.gz dest=/tmp copy=no
+  when: result.rc != 0 or result.stdout.split()[4].rstrip(',') != software.mysql.version
+
+- name: replace binaries {{ software.mysql.version }}
+  shell: if [ -d /tmp/{{ software.mysql.basename }} ]; then rm -rf /usr/local/mysql; mv /tmp/{{ software.mysql.basename }} /usr/local/mysql; fi
+  when: result.rc != 0 or result.stdout.split()[4].rstrip(',') != software.mysql.version
+
+- name: chown installation
+  file: path=/usr/local/mysql state=directory owner=mysql group=mysql recurse=yes
+
+- name: create temp directory
+  file: path=/usr/local/mysql/temp state=directory owner=mysql group=mysql recurse=yes
+
+- name: create data directory
+  file: path=/var/data/mysql/data state=directory owner=mysql group=mysql recurse=yes
+
+- name: install database
+  command: /usr/local/mysql/scripts/mysql_install_db --user=mysql --datadir=/var/data/mysql/data
+  when: result.rc != 0

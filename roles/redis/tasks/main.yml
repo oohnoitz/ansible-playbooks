@@ -1,0 +1,23 @@
+---
+
+- name: get current version
+  command: /usr/local/bin/redis-cli -v
+  register: result
+  ignore_errors: True
+  changed_when: False
+
+- name: download
+  get_url: url={{ download.redis.url }} dest=/tmp/{{ download.redis.url | basename }}
+  when: result.rc != 0 or result.stdout.split()[1] != software.redis.version
+
+- name: extract
+  unarchive: src=/tmp/{{ download.redis.url | basename }} dest=/tmp copy=no
+  when: result.rc != 0 or result.stdout.split()[1] != software.redis.version
+
+- name: compile
+  command: make chdir=/tmp/redis-{{ software.redis.version }}
+  when: result.rc != 0 or result.stdout.split()[1] != software.redis.version
+
+- name: install {{ software.redis.version }}
+  command: make install chdir=/tmp/redis-{{ software.redis.version }}
+  when: result.rc != 0 or result.stdout.split()[1] != software.redis.version

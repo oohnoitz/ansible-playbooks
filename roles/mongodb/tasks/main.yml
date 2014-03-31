@@ -1,0 +1,25 @@
+---
+
+- name: get current version
+  command: /usr/local/mongodb/bin/mongo --version
+  register: result
+  ignore_errors: True
+  changed_when: False
+
+- name: download
+  get_url: url={{ download.mongodb.url }} dest=/tmp/{{ software.mongodb.basename }}-main.tar.gz
+  when: result.rc != 0 or result.stdout.split()[3] != software.mongodb.version
+
+- name: extract
+  unarchive: src=/tmp/{{ software.mongodb.basename }}-main.tar.gz dest=/tmp copy=no
+  when: result.rc != 0 or result.stdout.split()[3] != software.mongodb.version
+
+- name: replace binaries {{ software.mongodb.version }}
+  shell: if [ -d /tmp/{{ software.mongodb.basename }} ]; then rm -rf /usr/local/mongodb; mv /tmp/{{ software.mongodb.basename }} /usr/local/mongodb; fi
+  when: result.rc != 0 or result.stdout.split()[3] != software.mongodb.version
+
+- name: create logs directory
+  file: path=/var/data/mongodb state=directory recurse=yes
+
+- name: create data directory
+  file: path=/var/log/mongodb state=directory recurse=yes

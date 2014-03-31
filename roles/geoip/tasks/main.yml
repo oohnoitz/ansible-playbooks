@@ -1,0 +1,16 @@
+---
+
+- name: download
+  get_url: url={{ download.geoip.url }} dest=/tmp/{{ download.geoip.url | basename }}
+
+- name: extract
+  unarchive: src=/tmp/{{ download.geoip.url | basename }} dest=/tmp copy=no
+
+- name: configure
+  command: ./configure --prefix=/usr/local/geoip chdir=/tmp/GeoIP-{{ software.geoip.version }}
+
+- name: make
+  command: make chdir=/tmp/GeoIP-{{ software.geoip.version }}
+
+- name: make install {{ software.nodejs.version }}
+  command: make install chdir=/tmp/GeoIP-{{ software.geoip.version }}

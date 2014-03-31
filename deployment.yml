@@ -1,0 +1,27 @@
+---
+
+- hosts: all
+  sudo: yes
+  vars_files:
+    - vars/software.yml
+
+  roles:
+    - { role: common }
+
+    - { role: geoip, tags: ['bind', 'geoip'] }
+    - { role: imagemagick, tags: ['imagemagick'] }
+    - { role: zopfli, tags: ['zopfli'] }
+
+    - { role: bind, tags: ['bind'] }
+    - { role: nginx, tags: ['nginx'] }
+
+    - { role: cassandra, tags: ['cassandra'] }
+    - { role: mongodb, tags: ['mongodb'] }
+    - { role: mysql, tags: ['mysql'] }
+    - { role: redis, tags: ['redis'] }
+
+    - { role: elasticsearch, tags: ['elasticsearch'] }
+    - { role: sphinxsearch, tags: ['sphinxsearch'] }
+
+    - { role: nodejs, tags: ['nodejs'] }
+    - { role: php, tags: ['php'] }

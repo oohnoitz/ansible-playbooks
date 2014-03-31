@@ -1,0 +1,58 @@
+---
+
+software:
+  bind:
+    version: "bind-9.9.5"
+    basename: "bind-9-9-5rc2"
+  cassandra:
+    version: "2.0.6"
+  elasticsearch:
+    version: "1.1.0"
+  imagemagick:
+    version: "6.8.8-10"
+  geoip:
+    version: "1.6.0"
+  mongodb:
+    version: "v1.4.0-mongodb-2.4.9"
+    basename: "tokumx-1.4.0-linux-x86_64"
+  mysql:
+    version: "5.5.30-tokudb-7.1.0-MariaDB"
+    basename: "mariadb-5.5.30-tokudb-7.1.0-linux-x86_64"
+  nginx:
+    version: "1.5.11"
+  nodejs:
+    version: "0.10.26"
+  php:
+    version: "5.5.10"
+  redis:
+    version: "2.8.6"
+  sphinxsearch:
+    version: "2.1.6"
+  zopfli:
+    version: "1.0.0"
+
+download:
+  bind:
+    url: "http://www.isc.org/downloads/file/{{ software.bind.basename }}"
+  cassandra:
+    url: "http://apache.mirrors.hoobly.com/cassandra/{{ software.cassandra.version }}/apache-cassandra-{{ software.cassandra.version }}-bin.tar.gz"
+  elasticsearch:
+    url: "https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-{{ software.elasticsearch.version }}.tar.gz"
+  imagemagick:
+    url: "http://www.imagemagick.org/download/ImageMagick-{{ software.imagemagick.version }}.tar.gz"
+  geoip:
+    url: "https://github.com/maxmind/geoip-api-c/releases/download/v{{ software.geoip.version }}/GeoIP-{{ software.geoip.version }}.tar.gz"
+  mongodb:
+    url: "http://www.tokutek.com/download.php?df=1&download_file={{ software.mongodb.basename }}-main.tar.gz"
+  mysql:
+    url: "http://www.tokutek.com/download.php?df=1&download_file={{ software.mysql.basename }}.tar.gz"
+  nodejs:
+    url: "http://nodejs.org/dist/v{{ software.nodejs.version }}/node-v{{ software.nodejs.version }}.tar.gz"
+  php:
+    url: "http://php.net/distributions/php-{{ software.php.version }}.tar.gz"
+  redis:
+    url: "http://download.redis.io/releases/redis-{{ software.redis.version }}.tar.gz"
+  sphinxsearch:
+    url: "http://sphinxsearch.com/files/sphinx-{{ software.sphinxsearch.version }}-release.tar.gz"
+  zopfli:
+    url: "https://zopfli.googlecode.com/files/zopfli-{{ software.zopfli.version }}.zip"

@@ -1,0 +1,19 @@
+---
+
+- name: get current version
+  command: /usr/local/cassandra/bin/cassandra -v
+  register: result
+  ignore_errors: True
+  changed_when: False
+
+- name: download
+  get_url: url={{ download.cassandra.url }} dest=/tmp/{{ download.cassandra.url | basename }}
+  when: result.rc != 0 or result.stdout != software.cassandra.version
+
+- name: extract
+  unarchive: src=/tmp/{{ download.cassandra.url | basename }} dest=/tmp copy=no
+  when: result.rc != 0 or result.stdout != software.cassandra.version
+
+- name: replace binaries {{ software.cassandra.version }}
+  shell: if [ -d /tmp/apache-cassandra-{{ software.cassandra.version }} ]; then rm -rf /usr/local/cassandra; mv /tmp/apache-cassandra-{{ software.cassandra.version }} /usr/local/cassandra; fi
+  when: result.rc != 0 or result.stdout != software.cassandra.version

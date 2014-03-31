@@ -1,0 +1,31 @@
+---
+
+- name: get current version
+  command: /usr/local/elasticsearch/bin/elasticsearch -v
+  register: result
+  ignore_errors: True
+  changed_when: False
+
+- name: install dependencies and packages
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - openjdk-7-jdk
+  when: result.rc != 0 or result.stdout.split()[1].rstrip(',') != software.elasticsearch.version
+
+- name: download
+  get_url: url={{ download.elasticsearch.url }} dest=/tmp/{{ download.elasticsearch.url | basename }}
+  when: result.rc != 0 or result.stdout.split()[1].rstrip(',') != software.elasticsearch.version
+
+- name: extract
+  unarchive: src=/tmp/{{ download.elasticsearch.url | basename }} dest=/tmp copy=no
+  when: result.rc != 0 or result.stdout.split()[1].rstrip(',') != software.elasticsearch.version
+
+- name: replace binaries {{ software.elasticsearch.version }}
+  shell: if [ -d /tmp/elasticsearch-{{ software.elasticsearch.version }} ]; then rm -rf /usr/local/elasticsearch; mv /tmp/elasticsearch-{{ software.elasticsearch.version }} /usr/local/elasticsearch; fi
+  when: result.rc != 0 or result.stdout.split()[1].rstrip(',') != software.elasticsearch.version
+
+- name: create logs directory
+  file: path=/var/log/elasticsearch state=directory recurse=yes
+
+- name: create data directory
+  file: path=/var/data/elasticsearch state=directory recurse=yes
