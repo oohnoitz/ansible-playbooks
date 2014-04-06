@@ -37,5 +37,5 @@
   file: path=/var/data/mysql/data state=directory owner=mysql group=mysql recurse=yes
 
 - name: install database
-  command: /usr/local/mysql/scripts/mysql_install_db --user=mysql --datadir=/var/data/mysql/data
+  command: /usr/local/mysql/scripts/mysql_install_db --user=mysql --datadir=/var/data/mysql/data chdir=/usr/local/mysql
   when: result.rc != 0
