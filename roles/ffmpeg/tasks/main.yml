@@ -1,0 +1,154 @@
+---
+
+- name: check installed
+  command: /usr/local/bin/ffmpeg -version
+  register: result
+  ignore_errors: True
+  changed_when: False
+
+- name: install dependencies and packages
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - libtool
+    - libass-dev
+    - libgpac-dev
+    - libtheora-dev
+    - libtool
+    - texi2html
+    - zlib1g-dev
+  when: result.rc != 0
+
+
+- name: yasm | clone
+  git: repo={{ download.ffmpeg.dep.yasm }} version=v{{ software.ffmpeg.dep.yasm }} dest=/tmp/yasm
+  when: result.rc != 0
+
+- name: yasm | autogen
+  command: ./autogen.sh chdir=/tmp/yasm
+  when: result.rc != 0
+
+- name: yasm | make
+  command: make chdir=/tmp/yasm
+  when: result.rc != 0
+
+- name: yasm | make install
+  command: make install chdir=/tmp/yasm
+  when: result.rc != 0
+
+
+- name: libogg | download
+  get_url: url={{ download.ffmpeg.dep.libogg }} dest=/tmp/{{ download.ffmpeg.dep.libogg | basename }}
+  when: result.rc != 0
+
+- name: libogg | extract
+  unarchive: src=/tmp/{{ download.ffmpeg.dep.libogg | basename }} dest=/tmp copy=no
+  when: result.rc != 0
+
+- name: libogg | configure
+  command: ./configure --disable-shared chdir=/tmp/libogg-{{ software.ffmpeg.dep.libogg }}
+  when: result.rc != 0
+
+- name: libogg | make
+  command: make chdir=/tmp/libogg-{{ software.ffmpeg.dep.libogg }}
+  when: result.rc != 0
+
+- name: libogg | make install
+  command: make install chdir=/tmp/libogg-{{ software.ffmpeg.dep.libogg }}
+  when: result.rc != 0
+
+
+- name: libopus | download
+  get_url: url={{ download.ffmpeg.dep.libopus }} dest=/tmp/{{ download.ffmpeg.dep.libopus | basename }}
+  when: result.rc != 0
+
+- name: libopus | extract
+  unarchive: src=/tmp/{{ download.ffmpeg.dep.libopus | basename }} dest=/tmp copy=no
+  when: result.rc != 0
+
+- name: libopus | configure
+  command: ./configure --disable-shared chdir=/tmp/opus-{{ software.ffmpeg.dep.libopus }}
+  when: result.rc != 0
+
+- name: libopus | make
+  command: make chdir=/tmp/opus-{{ software.ffmpeg.dep.libopus }}
+  when: result.rc != 0
+
+- name: libopus | make install
+  command: make install chdir=/tmp/opus-{{ software.ffmpeg.dep.libopus }}
+  when: result.rc != 0
+
+
+- name: libvorbis | download
+  get_url: url={{ download.ffmpeg.dep.libvorbis }} dest=/tmp/{{ download.ffmpeg.dep.libvorbis | basename }}
+  when: result.rc != 0
+
+- name: libvorbis | extract
+  unarchive: src=/tmp/{{ download.ffmpeg.dep.libvorbis | basename }} dest=/tmp copy=no
+  when: result.rc != 0
+
+- name: libvorbis | configure
+  command: ./configure --disable-shared chdir=/tmp/libvorbis-{{ software.ffmpeg.dep.libvorbis }}
+  when: result.rc != 0
+
+- name: libvorbis | make
+  command: make chdir=/tmp/libvorbis-{{ software.ffmpeg.dep.libvorbis }}
+  when: result.rc != 0
+
+- name: libvorbis | make install
+  command: make install chdir=/tmp/libvorbis-{{ software.ffmpeg.dep.libvorbis }}
+  when: result.rc != 0
+
+
+- name: libvpx | clone
+  git: repo={{ download.ffmpeg.dep.libvpx }} dest=/tmp/libvpx
+  when: result.rc != 0
+
+- name: libvpx | configure
+  command: ./configure chdir=/tmp/libvpx
+  when: result.rc != 0
+
+- name: libvpx | make
+  command: make chdir=/tmp/libvpx
+  when: result.rc != 0
+
+- name: libvpx | make install
+  command: make install chdir=/tmp/libvpx
+  when: result.rc != 0
+
+
+- name: libx264 | clone
+  git: repo={{ download.ffmpeg.dep.libx264 }} dest=/tmp/libx264
+  when: result.rc != 0
+
+- name: libx264 | configure
+  command: ./configure --enable-static chdir=/tmp/libx264
+  when: result.rc != 0
+
+- name: libx264 | make
+  command: make chdir=/tmp/libx264
+  when: result.rc != 0
+
+- name: libx264 | make install
+  command: make install chdir=/tmp/libx264
+  when: result.rc != 0
+
+- name: libx264 | make distclean
+  command: make distclean chdir=/tmp/libx264
+  when: result.rc != 0
+
+
+- name: clone
+  git: repo={{ download.ffmpeg.url }} dest=/tmp/ffmpeg
+  when: result.rc != 0
+
+- name: configure
+  command: ./configure --extra-libs="-ldl" --enable-gpl --enable-libass --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 chdir=/tmp/ffmpeg
+  when: result.rc != 0
+
+- name: make
+  command: make chdir=/tmp/ffmpeg
+  when: result.rc != 0
+
+- name: make install
+  command: make install chdir=/tmp/ffmpeg
+  when: result.rc != 0
