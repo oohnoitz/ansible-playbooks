@@ -6,6 +6,18 @@
   ignore_errors: True
   changed_when: False
 
+- name: install dependencies and packages
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - libx11-dev
+    - libxext-dev
+    - zlib1g-dev
+    - libpng12-dev
+    - libjpeg-dev
+    - libfreetype6-dev
+    - libxml2-dev
+  when: result.rc != 0 or result.stdout.split()[2] != software.imagemagick.version
+
 - name: download
   get_url: url={{ download.imagemagick.url }} dest=/tmp/{{ download.imagemagick.url | basename }}
   when: result.rc != 0 or result.stdout.split()[2] != software.imagemagick.version
