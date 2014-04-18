@@ -9,13 +9,13 @@
 - name: install dependencies and packages
   apt: pkg={{ item }} state=installed
   with_items:
+    - libfreetype6-dev
+    - libjpeg-dev
+    - libpng12-dev
     - libx11-dev
     - libxext-dev
-    - zlib1g-dev
-    - libpng12-dev
-    - libjpeg-dev
-    - libfreetype6-dev
     - libxml2-dev
+    - zlib1g-dev
   when: result.rc != 0 or result.stdout.split()[2] != software.imagemagick.version
 
 - name: download
