@@ -27,7 +27,7 @@ software:
     version: "5.5.36-tokudb-7.1.5-MariaDB"
     basename: "mariadb-5.5.36-tokudb-7.1.5-linux-x86_64"
   nginx:
-    version: "1.5.13"
+    version: "1.7.0"
   nodejs:
     version: "0.10.26"
   php:
