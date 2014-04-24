@@ -34,3 +34,12 @@
 - name: generate self-signed ssl
   command: openssl req -x509 -nodes -days 365 -newkey rsa:4096 -subj '/C=XX/ST= /O= /CN= ' -keyout /usr/local/nginx/conf/ssl/default.key -out /usr/local/nginx/conf/ssl/default.crt
   when: result.rc != 0 or result.stderr.split('/')[1] != software.nginx.version
+
+- name: copy nginx.conf
+  template: src={{ item }} dest=/usr/local/nginx/conf/nginx.conf
+  with_first_found:
+    - files:
+       - nginx.conf.j2
+      paths:
+       - ../../../private/nginx
+       - ../files
