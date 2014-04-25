@@ -1,5 +1,11 @@
 ---
 
+- name: get glibc version
+  command: /usr/bin/ldd --version
+  register: lld_version
+  ignore_errors: True
+  changed_when: False
+
 - name: get current version
   command: /usr/local/mysql/bin/mysql -V
   register: result
@@ -13,19 +19,23 @@
   apt: pkg={{ item }} state=installed
   with_items:
     - libaio-dev
-  when: result.rc != 0 or result.stdout.split()[4].rstrip(',') != software.mysql.version
+  when: result.rc != 0 or  result.stdout.split()[4].rstrip(',') != "{{ software.mysql.version }}-MariaDB"
 
-- name: download
-  get_url: url={{ download.mysql.url }} dest=/tmp/{{ software.mysql.basename }}.tar.gz
-  when: result.rc != 0 or result.stdout.split()[4].rstrip(',') != software.mysql.version
+- name: download (glibc)
+  get_url: url={{ download.mysql.url }} dest=/tmp/{{ download.mysql.url | basename }}
+  when: lld_version.stdout.split()[4] | float  < 2.14 and (result.rc != 0 or  result.stdout.split()[4].rstrip(',') != "{{ software.mysql.version }}-MariaDB")
+
+- name: download (glibc 2.14+)
+  get_url: url={{ download.mysql.url_glibc0214 }} dest=/tmp/{{ download.mysql.url | basename }}
+  when: lld_version.stdout.split()[4] | float >= 2.14 and (result.rc != 0 or  result.stdout.split()[4].rstrip(',') != "{{ software.mysql.version }}-MariaDB")
 
 - name: extract
-  unarchive: src=/tmp/{{ software.mysql.basename }}.tar.gz dest=/tmp copy=no
-  when: result.rc != 0 or result.stdout.split()[4].rstrip(',') != software.mysql.version
+  unarchive: src=/tmp/{{ download.mysql.url | basename }} dest=/tmp copy=no
+  when: result.rc != 0 or  result.stdout.split()[4].rstrip(',') != "{{ software.mysql.version }}-MariaDB"
 
 - name: replace binaries {{ software.mysql.version }}
-  shell: if [ -d /tmp/{{ software.mysql.basename }} ]; then rm -rf /usr/local/mysql; mv /tmp/{{ software.mysql.basename }} /usr/local/mysql; fi
-  when: result.rc != 0 or result.stdout.split()[4].rstrip(',') != software.mysql.version
+  shell: if [ -d /tmp/mariadb-{{ software.mysql.version }}-linux-x86_64 ]; then rm -rf /usr/local/mysql; mv /tmp/mariadb-{{ software.mysql.version }}-linux-x86_64 /usr/local/mysql; fi
+  when: result.rc != 0 or  result.stdout.split()[4].rstrip(',') != "{{ software.mysql.version }}-MariaDB"
 
 - name: chown installation
   file: path=/usr/local/mysql state=directory owner=mysql group=mysql recurse=yes

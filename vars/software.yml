@@ -24,8 +24,7 @@ software:
     version: "v1.4.1-mongodb-2.4.9"
     basename: "tokumx-1.4.1-linux-x86_64"
   mysql:
-    version: "5.5.36-tokudb-7.1.5-MariaDB"
-    basename: "mariadb-5.5.36-tokudb-7.1.5-linux-x86_64"
+    version: "10.0.10"
   nginx:
     version: "1.7.0"
   nodejs:
@@ -62,7 +61,8 @@ download:
   mongodb:
     url: "http://www.tokutek.com/download.php?df=1&download_file={{ software.mongodb.basename }}-main.tar.gz"
   mysql:
-    url: "http://www.tokutek.com/download.php?df=1&download_file={{ software.mysql.basename }}.tar.gz"
+    url: "http://ftp.osuosl.org/pub/mariadb/mariadb-{{ software.mysql.version }}/kvm-bintar-centos5-amd64/mariadb-{{ software.mysql.version }}-linux-x86_64.tar.gz"
+    url_glibc0214: "http://ftp.osuosl.org/pub/mariadb/mariadb-{{ software.mysql.version }}/kvm-bintar-quantal-amd64/mariadb-{{ software.mysql.version }}-linux-x86_64.tar.gz"
   nodejs:
     url: "http://nodejs.org/dist/v{{ software.nodejs.version }}/node-v{{ software.nodejs.version }}.tar.gz"
   php:
