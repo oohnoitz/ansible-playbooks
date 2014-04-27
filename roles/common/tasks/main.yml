@@ -1,8 +1,7 @@
 ---
 
 - name: upgrade apt packages
-  apt: update_cache=yes
-  apt: upgrade=yes
+  apt: upgrade=yes update_cache=yes
 
 - name: install apt packages
   apt: pkg={{ item }} state=installed
