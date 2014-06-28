@@ -25,3 +25,4 @@
 
     - { role: nodejs, tags: ['nodejs'] }
     - { role: php, tags: ['php'] }
+    - { role: hhvm, tags: ['hhvm'] }
