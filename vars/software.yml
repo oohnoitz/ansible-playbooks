@@ -20,9 +20,6 @@ software:
     version: "6.8.9-8"
   geoip:
     version: "1.6.0"
-  mongodb:
-    version: "v1.5.1-mongodb-2.4.10"
-    basename: "tokumx-1.5.1-linux-x86_64"
   mysql:
     version: "10.0.14"
   nginx:
@@ -58,8 +55,6 @@ download:
     url: "http://www.imagemagick.org/download/ImageMagick-{{ software.imagemagick.version }}.tar.gz"
   geoip:
     url: "https://github.com/maxmind/geoip-api-c/releases/download/v{{ software.geoip.version }}/GeoIP-{{ software.geoip.version }}.tar.gz"
-  mongodb:
-    url: "http://www.tokutek.com/download.php?df=1&download_file={{ software.mongodb.basename }}-main.tar.gz"
   mysql:
     url: "http://ftp.osuosl.org/pub/mariadb/mariadb-{{ software.mysql.version }}/bintar-centos5-amd64/mariadb-{{ software.mysql.version }}-linux-x86_64.tar.gz"
     url_glibc0214: "http://ftp.osuosl.org/pub/mariadb/mariadb-{{ software.mysql.version }}/bintar-quantal-amd64/mariadb-{{ software.mysql.version }}-linux-x86_64.tar.gz"
