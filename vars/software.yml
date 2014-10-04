@@ -56,8 +56,8 @@ download:
   geoip:
     url: "https://github.com/maxmind/geoip-api-c/releases/download/v{{ software.geoip.version }}/GeoIP-{{ software.geoip.version }}.tar.gz"
   mysql:
-    url: "http://ftp.osuosl.org/pub/mariadb/mariadb-{{ software.mysql.version }}/bintar-centos5-amd64/mariadb-{{ software.mysql.version }}-linux-x86_64.tar.gz"
-    url_glibc0214: "http://ftp.osuosl.org/pub/mariadb/mariadb-{{ software.mysql.version }}/bintar-quantal-amd64/mariadb-{{ software.mysql.version }}-linux-x86_64.tar.gz"
+    url: "http://ftp.osuosl.org/pub/mariadb/mariadb-{{ software.mysql.version }}/bintar-linux-x86_64/mariadb-{{ software.mysql.version }}-linux-x86_64.tar.gz"
+    url_glibc0214: "http://ftp.osuosl.org/pub/mariadb/mariadb-{{ software.mysql.version }}/bintar-linux-glibc_214-x86_64/mariadb-{{ software.mysql.version }}-linux-glibc_214-x86_64.tar.gz"
   nodejs:
     url: "http://nodejs.org/dist/v{{ software.nodejs.version }}/node-v{{ software.nodejs.version }}.tar.gz"
   php:
