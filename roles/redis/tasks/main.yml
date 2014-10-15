@@ -18,6 +18,9 @@
   command: make chdir=/tmp/redis-{{ software.redis.version }}
   when: result.rc != 0 or result.stdout.split()[1] != software.redis.version
 
+- name: create data directory
+  file: path=/var/lib/redis state=directory recurse=yes
+
 - name: create logs directory
   file: path=/var/log/redis state=directory recurse=yes
 
