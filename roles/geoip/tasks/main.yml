@@ -12,5 +12,5 @@
 - name: make
   command: make chdir=/tmp/GeoIP-{{ software.geoip.version }}
 
-- name: make install {{ software.nodejs.version }}
+- name: make install {{ software.geoip.version }}
   command: make install chdir=/tmp/GeoIP-{{ software.geoip.version }}

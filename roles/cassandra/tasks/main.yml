@@ -6,6 +6,12 @@
   ignore_errors: True
   changed_when: False
 
+- name: install dependencies and packages
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - openjdk-7-jdk
+  when: result.rc != 0 or result.stdout != software.cassandra.version
+
 - name: download
   get_url: url={{ download.cassandra.url }} dest=/tmp/{{ download.cassandra.url | basename }}
   when: result.rc != 0 or result.stdout != software.cassandra.version

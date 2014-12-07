@@ -8,20 +8,20 @@
 
 - name: download
   get_url: url={{ download.sphinxsearch.url }} dest=/tmp/{{ download.sphinxsearch.url | basename }}
-  when: result.rc != 0 or result.stdout.split()[1] != '{{ software.sphinxsearch.version }}-release'
+  when: result.rc != 0 or result.stdout.split()[1] != '{{ software.sphinxsearch.version }}-id64-release'
 
 - name: extract
   unarchive: src=/tmp/{{ download.sphinxsearch.url | basename }} dest=/tmp copy=no
-  when: result.rc != 0 or result.stdout.split()[1] != '{{ software.sphinxsearch.version }}-release'
+  when: result.rc != 0 or result.stdout.split()[1] != '{{ software.sphinxsearch.version }}-id64-release'
 
 - name: configure
   command: ./configure chdir=/tmp/sphinx-{{ software.sphinxsearch.version }}-release
-  when: result.rc != 0 or result.stdout.split()[1] != '{{ software.sphinxsearch.version }}-release'
+  when: result.rc != 0 or result.stdout.split()[1] != '{{ software.sphinxsearch.version }}-id64-release'
 
 - name: make
   command: make chdir=/tmp/sphinx-{{ software.sphinxsearch.version }}-release
-  when: result.rc != 0 or result.stdout.split()[1] != '{{ software.sphinxsearch.version }}-release'
+  when: result.rc != 0 or result.stdout.split()[1] != '{{ software.sphinxsearch.version }}-id64-release'
 
 - name: make install {{ software.sphinxsearch.version }}
   command: make install chdir=/tmp/sphinx-{{ software.sphinxsearch.version }}-release
-  when: result.rc != 0 or result.stdout.split()[1] != '{{ software.sphinxsearch.version }}-release'
+  when: result.rc != 0 or result.stdout.split()[1] != '{{ software.sphinxsearch.version }}-id64-release'
