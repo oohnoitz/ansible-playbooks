@@ -13,29 +13,25 @@
   when: result.rc != 0 or result.stdout.split()[1] != software.bind.version
 
 - name: download
-  get_url: url={{ download.bind.url }} dest=/tmp/{{ software.bind.version }}.tar.gz
-  when: result.rc != 0 or result.stdout.split()[1] != software.bind.version
-
-- name: clean directory
-  command: rm -rf /tmp/{{ software.bind.version }}
+  get_url: url={{ download.bind.url }} dest=/tmp/{{ download.bind.url | basename }}
   when: result.rc != 0 or result.stdout.split()[1] != software.bind.version
 
 - name: extract
-  unarchive: src=/tmp/{{ software.bind.version }}.tar.gz dest=/tmp copy=no
+  unarchive: src=/tmp/{{ download.bind.url | basename }} dest=/tmp copy=no
   when: result.rc != 0 or result.stdout.split()[1] != software.bind.version
 
 - name: autoconf
-  command: autoconf chdir=/tmp/{{ software.bind.version }}
+  command: autoconf chdir=/tmp/bind-{{ software.bind.version }}
   when: result.rc != 0 or result.stdout.split()[1] != software.bind.version
 
 - name: configure
-  command: ./configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --sysconfdir=/etc/bind --localstatedir=/var --enable-threads --enable-largefile --with-libtool --enable-shared --enable-static --with-openssl=/usr --with-gssapi=/usr --with-gnu-ld --with-dlz-postgres=no --with-dlz-mysql=no --with-dlz-filesystem=yes --with-dlz-stub=yes --with-dlz-dlopen=yes --with-geoip=/usr/local/geoip --enable-ipv6 CFLAGS=-fno-strict-aliasing chdir=/tmp/{{ software.bind.version }}
+  command: ./configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --sysconfdir=/etc/bind --localstatedir=/var --enable-threads --enable-largefile --with-libtool --enable-shared --enable-static --with-openssl=/usr --with-gssapi=/usr --with-gnu-ld --with-dlz-postgres=no --with-dlz-mysql=no --with-dlz-filesystem=yes --with-dlz-stub=yes --with-dlz-dlopen=yes --with-geoip=/usr/local/geoip --enable-ipv6 CFLAGS=-fno-strict-aliasing chdir=/tmp/bind-{{ software.bind.version }}
   when: result.rc != 0 or result.stdout.split()[1] != software.bind.version
 
 - name: make
-  command: make chdir=/tmp/{{ software.bind.version }}
+  command: make chdir=/tmp/bind-{{ software.bind.version }}
   when: result.rc != 0 or result.stdout.split()[1] != software.bind.version
 
 - name: make install {{ software.bind.version }}
-  command: make install chdir=/tmp/{{ software.bind.version }}
+  command: make install chdir=/tmp/bind-{{ software.bind.version }}
   when: result.rc != 0 or result.stdout.split()[1] != software.bind.version
