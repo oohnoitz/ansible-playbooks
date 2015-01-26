@@ -23,6 +23,8 @@
     - { role: elasticsearch, tags: ['elasticsearch'] }
     - { role: sphinxsearch, tags: ['sphinxsearch'] }
 
+    - { role: rabbitmq, tags: ['rabbitmq'] }
+
     - { role: nodejs, tags: ['nodejs'] }
     - { role: php, tags: ['php'] }
     - { role: hhvm, tags: ['hhvm'] }
