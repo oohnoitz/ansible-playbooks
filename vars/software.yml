@@ -60,7 +60,7 @@ download:
   geoip:
     url: "http://mirror.jii.moe/software/geoip/GeoIP-{{ software.geoip.version }}.tar.gz"
   kafka:
-    url: "http://mirror.jii.moe/software/kafka/kafka_{{ software.kafka.scala }}-{{ softare.kafka.version }}.tgz"
+    url: "http://mirror.jii.moe/software/kafka/kafka_{{ software.kafka.scala }}-{{ software.kafka.version }}.tgz"
   mysql:
     url: "http://mirror.jii.moe/software/mariadb/mariadb-{{ software.mysql.version }}-linux-x86_64.tar.gz"
     url_glibc0214: "http://mirror.jii.moe/software/mariadb/mariadb-{{ software.mysql.version }}-linux-glibc_214-x86_64.tar.gz"
