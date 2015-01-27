@@ -19,6 +19,9 @@ software:
     version: "6.9.0-0"
   geoip:
     version: "1.6.3"
+  kafka:
+    scala: "2.10"
+    version: "0.8.1.1"
   mysql:
     version: "10.0.15"
   nginx:
@@ -29,6 +32,8 @@ software:
     version: "5.6.3"
   redis:
     version: "2.8.18"
+  scala:
+    version: "2.10.4"
   sphinxsearch:
     version: "2.2.6"
   zopfli:
@@ -54,6 +59,8 @@ download:
     url: "http://mirror.jii.moe/software/imagemagick/ImageMagick-{{ software.imagemagick.version }}.tar.gz"
   geoip:
     url: "http://mirror.jii.moe/software/geoip/GeoIP-{{ software.geoip.version }}.tar.gz"
+  kafka:
+    url: "http://mirror.jii.moe/software/kafka/kafka_{{ software.kafka.scala }}-{{ softare.kafka.version }}.tgz"
   mysql:
     url: "http://mirror.jii.moe/software/mariadb/mariadb-{{ software.mysql.version }}-linux-x86_64.tar.gz"
     url_glibc0214: "http://mirror.jii.moe/software/mariadb/mariadb-{{ software.mysql.version }}-linux-glibc_214-x86_64.tar.gz"
@@ -61,6 +68,8 @@ download:
     url: "http://mirror.jii.moe/software/node/node-v{{ software.nodejs.version }}.tar.gz"
   php:
     url: "http://mirror.jii.moe/software/php/php-{{ software.php.version }}.tar.gz"
+  scala:
+    url: "http://mirror.jii.moe/software/scala/scala-{{ software.scala.version }}.deb"
   redis:
     url: "http://mirror.jii.moe/software/redis/redis-{{ software.redis.version }}.tar.gz"
   sphinxsearch:

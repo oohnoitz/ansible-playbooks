@@ -1,0 +1,23 @@
+---
+
+- name: install dependencies and packages
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - libhawtjni-runtime-java
+    - libjansi-native-java
+    - libjansi-java
+
+- name: download scala-lang
+  get_url: url={{ download.scala.url }} dest=/tmp/{{ download.scala.url | basename }}
+
+- name: install scala-lang
+  apt: deb=/tmp/{{ download.scala.url | basename }}
+
+- name: download
+  get_url: url={{ download.kafka.url }} dest=/tmp/{{ download.kafka.url | basename }}
+
+- name: extract
+  unarchive: src=/tmp/{{ download.kafka.url | basename }} dest=/tmp copy=no
+
+- name: replace binaries
+  shell: if [ -d /usr/local/kafka ]; then rm -rf /usr/local/kafka; mv /tmp/{{ download.kafka.url | basename }} /usr/local/kafka; fi
