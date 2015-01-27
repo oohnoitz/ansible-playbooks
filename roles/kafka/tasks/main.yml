@@ -20,4 +20,4 @@
   unarchive: src=/tmp/{{ download.kafka.url | basename }} dest=/tmp copy=no
 
 - name: replace binaries
-  shell: if [ -d /usr/local/kafka ]; then rm -rf /usr/local/kafka; mv /tmp/{{ download.kafka.url | basename }} /usr/local/kafka; fi
+  shell: if [ -d /tmp/{{ download.kafka.url | basename }} ]; then rm -rf /usr/local/kafka; mv /tmp/{{ download.kafka.url | basename }} /usr/local/kafka; fi
