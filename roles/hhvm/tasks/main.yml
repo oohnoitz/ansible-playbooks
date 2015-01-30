@@ -4,7 +4,7 @@
   apt_key: url=http://dl.hhvm.com/conf/hhvm.gpg.key state=present
 
 - name: add repository
-  apt_repository: repo='deb http://dl.hhvm.com/debian wheezy main' state=present
+  apt_repository: repo='deb http://dl.hhvm.com/debian jessie main' state=present
 
 - name: install hhvm-nightly
   apt: pkg=hhvm-nightly state=latest
