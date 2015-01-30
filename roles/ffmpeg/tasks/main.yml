@@ -28,7 +28,7 @@
   when: result.rc != 0
 
 - name: yasm | make
-  command: make chdir=/tmp/yasm
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/yasm
   when: result.rc != 0
 
 - name: yasm | make install
@@ -49,7 +49,7 @@
   when: result.rc != 0
 
 - name: libogg | make
-  command: make chdir=/tmp/libogg-{{ software.ffmpeg.dep.libogg }}
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/libogg-{{ software.ffmpeg.dep.libogg }}
   when: result.rc != 0
 
 - name: libogg | make install
@@ -70,7 +70,7 @@
   when: result.rc != 0
 
 - name: libopus | make
-  command: make chdir=/tmp/opus-{{ software.ffmpeg.dep.libopus }}
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/opus-{{ software.ffmpeg.dep.libopus }}
   when: result.rc != 0
 
 - name: libopus | make install
@@ -91,7 +91,7 @@
   when: result.rc != 0
 
 - name: libvorbis | make
-  command: make chdir=/tmp/libvorbis-{{ software.ffmpeg.dep.libvorbis }}
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/libvorbis-{{ software.ffmpeg.dep.libvorbis }}
   when: result.rc != 0
 
 - name: libvorbis | make install
@@ -108,7 +108,7 @@
   when: result.rc != 0
 
 - name: libvpx | make
-  command: make chdir=/tmp/libvpx
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/libvpx
   when: result.rc != 0
 
 - name: libvpx | make install
@@ -125,7 +125,7 @@
   when: result.rc != 0
 
 - name: libx264 | make
-  command: make chdir=/tmp/libx264
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/libx264
   when: result.rc != 0
 
 - name: libx264 | make install
@@ -146,7 +146,7 @@
   when: result.rc != 0
 
 - name: make
-  command: make chdir=/tmp/ffmpeg
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/ffmpeg
   when: result.rc != 0
 
 - name: make install

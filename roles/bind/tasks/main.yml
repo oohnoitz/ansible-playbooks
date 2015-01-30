@@ -29,7 +29,7 @@
   when: result.rc != 0 or result.stdout.split()[1] != software.bind.version
 
 - name: make
-  command: make chdir=/tmp/bind-{{ software.bind.version }}
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/bind-{{ software.bind.version }}
   when: result.rc != 0 or result.stdout.split()[1] != software.bind.version
 
 - name: make install {{ software.bind.version }}

@@ -26,7 +26,7 @@
   when: result.rc != 0 or result.stdout.lstrip('v') != software.nodejs.version
 
 - name: make
-  command: make chdir=/tmp/node-v{{ software.nodejs.version }}
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/node-v{{ software.nodejs.version }}
   when: result.rc != 0 or result.stdout.lstrip('v') != software.nodejs.version
 
 - name: make install {{ software.nodejs.version }}

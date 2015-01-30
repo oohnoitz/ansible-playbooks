@@ -10,7 +10,7 @@
   command: ./configure --prefix=/usr/local/geoip chdir=/tmp/GeoIP-{{ software.geoip.version }}
 
 - name: make
-  command: make chdir=/tmp/GeoIP-{{ software.geoip.version }}
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/GeoIP-{{ software.geoip.version }}
 
 - name: make install {{ software.geoip.version }}
   command: make install chdir=/tmp/GeoIP-{{ software.geoip.version }}

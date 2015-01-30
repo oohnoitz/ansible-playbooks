@@ -31,7 +31,7 @@
   when: result.rc != 0 or result.stdout.split()[2] != software.imagemagick.version
 
 - name: make
-  command: make chdir=/tmp/ImageMagick-{{ software.imagemagick.version }}
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/ImageMagick-{{ software.imagemagick.version }}
   when: result.rc != 0 or result.stdout.split()[2] != software.imagemagick.version
 
 - name: make install {{ software.imagemagick.version }}

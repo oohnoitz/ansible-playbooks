@@ -19,7 +19,7 @@
   when: result.rc != 0 or result.stdout.split()[1] != '{{ software.sphinxsearch.version }}-id64-release'
 
 - name: make
-  command: make chdir=/tmp/sphinx-{{ software.sphinxsearch.version }}-release
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/sphinx-{{ software.sphinxsearch.version }}-release
   when: result.rc != 0 or result.stdout.split()[1] != '{{ software.sphinxsearch.version }}-id64-release'
 
 - name: make install {{ software.sphinxsearch.version }}

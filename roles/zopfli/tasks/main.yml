@@ -15,7 +15,7 @@
   when: result.rc != 0
 
 - name: make
-  command: make chdir=/tmp/zopfli-{{ software.zopfli.version }}
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/zopfli-{{ software.zopfli.version }}
   when: result.rc != 0
 
 - name: install {{ software.zopfli.version }}
