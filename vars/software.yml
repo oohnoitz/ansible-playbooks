@@ -60,7 +60,7 @@ download:
   imagemagick:
     url: "http://mirror.jii.moe/software/imagemagick/ImageMagick-{{ software.imagemagick.version }}.tar.gz"
   iojs:
-    url: "http://mirror.jii.moe/software/iojs/iojs-v{{ software.iojs.version }}-linux-x64.tar.xz"
+    url: "http://mirror.jii.moe/software/iojs/iojs-v{{ software.iojs.version }}.tar.xz"
   geoip:
     url: "http://mirror.jii.moe/software/geoip/GeoIP-{{ software.geoip.version }}.tar.gz"
   kafka:

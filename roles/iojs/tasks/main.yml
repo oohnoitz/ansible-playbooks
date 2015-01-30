@@ -22,13 +22,13 @@
   when: result.rc != 0 or result.stdout.lstrip('v') != software.iojs.version
 
 - name: configure
-  command: ./configure chdir=/tmp/iojs-v{{ software.iojs.version }}-linux-x64
+  command: ./configure chdir=/tmp/iojs-v{{ software.iojs.version }}
   when: result.rc != 0 or result.stdout.lstrip('v') != software.iojs.version
 
 - name: make
-  command: make chdir=/tmp/iojs-v{{ software.iojs.version }}-linux-x64
+  command: make chdir=/tmp/iojs-v{{ software.iojs.version }}
   when: result.rc != 0 or result.stdout.lstrip('v') != software.iojs.version
 
 - name: make install {{ software.iojs.version }}
-  command: make install chdir=/tmp/iojs-v{{ software.iojs.version }}-linux-x64
+  command: make install chdir=/tmp/iojs-v{{ software.iojs.version }}
   when: result.rc != 0 or result.stdout.lstrip('v') != software.iojs.version
