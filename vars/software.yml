@@ -17,6 +17,8 @@ software:
       libvpx: "master"
   imagemagick:
     version: "6.9.0-0"
+  iojs:
+    version: "1.0.4"
   geoip:
     version: "1.6.3"
   kafka:
@@ -57,6 +59,8 @@ download:
       libx264: "http://git.videolan.org/git/x264.git"
   imagemagick:
     url: "http://mirror.jii.moe/software/imagemagick/ImageMagick-{{ software.imagemagick.version }}.tar.gz"
+  iojs:
+    url: "http://mirror.jii.moe/software/iojs/iojs-{{ software.iojs.version }}-linux-x64.tar.xz"
   geoip:
     url: "http://mirror.jii.moe/software/geoip/GeoIP-{{ software.geoip.version }}.tar.gz"
   kafka:
