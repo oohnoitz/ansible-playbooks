@@ -15,6 +15,7 @@
     - libssl-dev
     - locales-all
     - ltrace
+    - pkg-config
     - strace
     - tmux
     - unzip
