@@ -18,7 +18,7 @@
     - libmcrypt-dev
     - libicu-dev
     - libbison-dev
-    - bision
+    - bison
     - re2c
   when: result.rc != 0 or result.stdout.split()[1] != software.php.version
 
