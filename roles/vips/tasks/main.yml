@@ -29,11 +29,11 @@
   when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
 
 - name: libwebp | make
-  command: make -j{{ ansible_processor_cores }} chdir=/tmp/{{ software.vips.dep.libwebp }}
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/libwebp-{{ software.vips.dep.libwebp }}
   when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
 
 - name: libwebp | make install
-  command: make install chdir=/tmp/{{ software.vips.dep.libwebp }}
+  command: make install chdir=/tmp/libwebp-{{ software.vips.dep.libwebp }}
   when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
 
 - name: clone
