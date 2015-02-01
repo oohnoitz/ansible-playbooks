@@ -21,7 +21,7 @@
   when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
 
 - name: libwebp | extract
-  unarchive: src=/tmp/{{ download.vips.dep.libwebp }} dest=/tmp copy=no
+  unarchive: src=/tmp/{{ download.vips.dep.libwebp | basename }} dest=/tmp copy=no
   when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
 
 - name: libwebp | configure
@@ -57,4 +57,3 @@
   notify:
     - run ldconfig
   when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
-  
