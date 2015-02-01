@@ -1,7 +1,7 @@
 ---
 
 - name: get current kafka version
-  shell: test -d /usr/local/kafka/libs/kafka_{{ software.kafka.scala }}-{{ software.kafka.version }}.jar && echo 1 || echo 0
+  shell: test -d /usr/local/kafka/libs/kafka_{{ software.kafka.scala }}-{{ software.kafka.version }}.jar && echo 0 || echo 1
   register: result
   ignore_errors: True
   changed_when: False
@@ -14,19 +14,13 @@
     - libjansi-java
   when: result.stdout != 0
 
-- name: get current scala version
-  command: /usr/bin/scalac -version
-  register: scala_result
-  ignore_errors: True
-  changed_when: False
-
 - name: download scala-lang
   get_url: url={{ download.scala.url }} dest=/tmp/{{ download.scala.url | basename }}
-  when: scala_result.rc != 0 or scala_result.stdout.split()[3] != software.scala.version
+  when: result.stdout != 0
 
 - name: install scala-lang
   apt: deb=/tmp/{{ download.scala.url | basename }}
-  when: scala_result.rc != 0 or scala_result.stdout.split()[3] != software.scala.version
+  when: result.stdout != 0
 
 - name: download
   get_url: url={{ download.kafka.url }} dest=/tmp/{{ download.kafka.url | basename }}
