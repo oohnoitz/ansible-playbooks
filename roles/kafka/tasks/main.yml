@@ -1,23 +1,41 @@
 ---
 
+- name: get current kafka version
+  shell: test -d /usr/local/kafka/libs/kafka_{{ software.kafka.scala }}-{{ software.kafka.version }}.jar && echo 1 || echo 0
+  register: result
+  ignore_errors: True
+  changed_when: False
+
 - name: install dependencies and packages
   apt: pkg={{ item }} state=installed
   with_items:
     - libhawtjni-runtime-java
     - libjansi-native-java
     - libjansi-java
+  when: result.stdout != 0
+
+- name: get current scala version
+  command: /usr/bin/scalac -version
+  register: scala_result
+  ignore_errors: True
+  changed_when: False
 
 - name: download scala-lang
   get_url: url={{ download.scala.url }} dest=/tmp/{{ download.scala.url | basename }}
+  when: scala_result.rc != 0 or scala_result.stdout.split()[3] != software.scala.version
 
 - name: install scala-lang
   apt: deb=/tmp/{{ download.scala.url | basename }}
+  when: scala_result.rc != 0 or scala_result.stdout.split()[3] != software.scala.version
 
 - name: download
   get_url: url={{ download.kafka.url }} dest=/tmp/{{ download.kafka.url | basename }}
+  when: result.stdout != 0
 
 - name: extract
   unarchive: src=/tmp/{{ download.kafka.url | basename }} dest=/tmp copy=no
+  when: result.stdout != 0
 
 - name: replace binaries
   shell: if [ -d /tmp/kafka_{{ software.kafka.scala }}-{{ software.kafka.version}} ]; then rm -rf /usr/local/kafka; mv /tmp/kafka_{{ software.kafka.scala }}-{{ software.kafka.version}} /usr/local/kafka; fi
+  when: result.stdout != 0
