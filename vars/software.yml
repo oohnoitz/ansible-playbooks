@@ -38,6 +38,10 @@ software:
     version: "2.10.4"
   sphinxsearch:
     version: "2.2.6"
+  vips:
+    version: "7.42.2"
+    dep:
+      libwebp: "0.4.2"
   zopfli:
     version: "1.0.0"
 
@@ -78,5 +82,9 @@ download:
     url: "http://mirror.jii.moe/software/redis/redis-{{ software.redis.version }}.tar.gz"
   sphinxsearch:
     url: "http://mirror.jii.moe/software/sphinxsearch/sphinx-{{ software.sphinxsearch.version }}-release.tar.gz"
+  vips:
+    url: "https://github.com/jcupitt/libvips.git"
+    dep:
+      libwebp: "http://mirror.jii.moe/software/libwebp/libwebp-{{ software.vips.dep.libwebp }}.tar.gz"
   zopfli:
     url: "http://mirror.jii.moe/software/zopfli/zopfli-{{ software.zopfli.version }}.zip"

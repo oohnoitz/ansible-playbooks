@@ -1,0 +1,56 @@
+---
+
+- name: get current version
+  command: /usr/local/bin/vips --vips-version
+  register: result
+  ignore_errors: True
+  changed_when: False
+
+- name: install dependencies and packages
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - libspice-client-glib-2.0-dev
+    - gettext
+    - gobject-introspection
+    - gtk-doc-tools
+    - swig
+  when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
+
+- name: libwebp | download
+  get_url: url={{ download.vips.dep.libwebp }} dest=/tmp/{{ download.vips.dep.libwebp | basename }}
+  when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
+
+- name: libwebp | configure
+  command: ./configure chdir=/tmp/libwebp-{{ software.vips.dep.libwebp }}
+  when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
+
+- name: libwebp | make
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/{{ download.vips.dep.libwebp | basename }}
+  when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
+
+- name: libwebp | make install
+  command: make instal chdir=/tmp/{{ download.vips.dep.libwebp | basename }}
+  when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
+
+- name: clone
+  git: repo={{ download.vips.url }} dest=/tmp/libvips
+  when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
+
+- name: bootstrap
+  command: ./bootstrap.sh chdir=/tmp/libvips
+  when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
+
+- name: configure
+  command: ./configure chdir=/tmp/libvips
+  when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
+
+- name: make
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/libvips
+  when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
+
+- name: make install
+  command: make install chdir=/tmp/libvips
+  notify:
+    - run ldconfig
+  when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
+  

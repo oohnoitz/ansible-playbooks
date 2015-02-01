@@ -10,6 +10,7 @@
 
     - { role: geoip, tags: ['bind', 'geoip'] }
     - { role: imagemagick, tags: ['imagemagick'] }
+    - { role: vips, tags: ['vips'] }
     - { role: zopfli, tags: ['zopfli'] }
 
     - { role: bind, tags: ['bind'] }
