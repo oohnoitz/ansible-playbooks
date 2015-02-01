@@ -20,6 +20,10 @@
   get_url: url={{ download.vips.dep.libwebp }} dest=/tmp/{{ download.vips.dep.libwebp | basename }}
   when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
 
+- name: libwebp | extract
+  unarchive: src=/tmp/{{ download.vips.dep.libwebp }} dest=/tmp copy=no
+  when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
+
 - name: libwebp | configure
   command: ./configure chdir=/tmp/libwebp-{{ software.vips.dep.libwebp }}
   when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
