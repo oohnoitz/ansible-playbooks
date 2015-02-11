@@ -6,7 +6,7 @@ software:
   cassandra:
     version: "2.1.2"
   elasticsearch:
-    version: "1.4.1"
+    version: "1.4.2"
   ffmpeg:
     version: "master"
     dep:
@@ -16,28 +16,28 @@ software:
       libvorbis: "1.3.4"
       libvpx: "master"
   imagemagick:
-    version: "6.9.0-0"
+    version: "6.9.0-5"
   iojs:
-    version: "1.0.4"
+    version: "1.2.0"
   geoip:
-    version: "1.6.3"
+    version: "1.6.4"
   kafka:
     scala: "2.10"
     version: "0.8.1.1"
   mysql:
-    version: "10.0.15"
+    version: "10.0.16"
   nginx:
-    version: "1.7.8"
+    version: "1.7.10"
   nodejs:
-    version: "0.10.33"
+    version: "0.12.0"
   php:
-    version: "5.6.3"
+    version: "5.6.5"
   redis:
-    version: "2.8.18"
+    version: "2.8.19"
   scala:
     version: "2.10.4"
   sphinxsearch:
-    version: "2.2.6"
+    version: "2.2.7"
   vips:
     version: "7.42.2"
     dep:
