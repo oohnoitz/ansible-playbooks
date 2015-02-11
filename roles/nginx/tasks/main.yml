@@ -43,3 +43,6 @@
       paths:
        - ../../../private/nginx
        - ../files
+
+- name: mkdir /var/www
+  file: path=/var/www owner=vagrant group=vagrant state=directory recurse=true
