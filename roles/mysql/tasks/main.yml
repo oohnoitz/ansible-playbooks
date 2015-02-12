@@ -50,6 +50,10 @@
   command: /usr/local/mysql/scripts/mysql_install_db --user=mysql --datadir=/var/data/mysql/data chdir=/usr/local/mysql
   when: result.rc != 0
 
+- name: remove conflicting my.cnf
+  file: src=/etc/my.cnf state=absent
+  when: result.rc != 0
+
 - name: copy ldconfig file
   copy: src=../files/mysql.so.conf dest=/etc/ld.so.conf.d/mysql.so.conf
   notify:
