@@ -20,6 +20,7 @@
     - { role: mongodb, tags: ['mongodb'] }
     - { role: mysql, tags: ['mysql'] }
     - { role: redis, tags: ['redis'] }
+    - { role: postgres, tags: ['postgres']}
 
     - { role: elasticsearch, tags: ['elasticsearch'] }
     - { role: sphinxsearch, tags: ['sphinxsearch'] }
