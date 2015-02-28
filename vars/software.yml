@@ -24,6 +24,8 @@ software:
   kafka:
     scala: "2.11"
     version: "0.8.2.0"
+  mozjpeg:
+    version: "3.0"
   mysql:
     version: "10.0.16"
   nginx:
@@ -69,6 +71,8 @@ download:
     url: "http://mirror.jii.moe/software/geoip/GeoIP-{{ software.geoip.version }}.tar.gz"
   kafka:
     url: "http://mirror.jii.moe/software/kafka/kafka_{{ software.kafka.scala }}-{{ software.kafka.version }}.tgz"
+  mozjpeg:
+    url: "https://github.com/mozilla/mozjpeg.git"
   mysql:
     url: "http://mirror.jii.moe/software/mariadb/mariadb-{{ software.mysql.version }}-linux-x86_64.tar.gz"
     url_glibc0214: "http://mirror.jii.moe/software/mariadb/mariadb-{{ software.mysql.version }}-linux-glibc_214-x86_64.tar.gz"
