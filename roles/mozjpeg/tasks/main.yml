@@ -9,25 +9,31 @@
 - name: install dependencies and packages
   apt: pkg={{ item }} state=installed
   with_items:
+    - autoconf
+    - automake
+    - libtool
     - nasm
+    - pkg-config
   when: result.rc != 0 or result.stderr.split()[2] != software.mozjpeg.version
 
-- name: clone
-  git: repo={{ download.mozjpeg.url }} dest=/tmp/mozjpeg
+- name: download
+  get_url: url={{ download.mozjpeg.url }} dest=/tmp/{{ download.mozjpeg.url | basename }}
   when: result.rc != 0 or result.stderr.split()[2] != software.mozjpeg.version
 
-- name: autoreconf
-  command: autoreconf -fiv chdir=/tmp/mozjpeg
+- name: extract
+  unarchive: src=/tmp/{{ download.mozjpeg.url | basename }} dest=/tmp copy=no
   when: result.rc != 0 or result.stderr.split()[2] != software.mozjpeg.version
 
 - name: configure
-  command: ./configure chdir=/tmp/mozjpeg
+  command: ./configure chdir=/tmp/mozjpeg-{{ software.mozjpeg.version }}
   when: result.rc != 0 or result.stderr.split()[2] != software.mozjpeg.version
 
 - name: make
-  command: make -j{{ ansible_processor_cores }} chdir=/tmp/mozjpeg
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/mozjpeg-{{ software.mozjpeg.version }}
   when: result.rc != 0 or result.stderr.split()[2] != software.mozjpeg.version
 
 - name: make install
-  command: make install chdir=/tmp/mozjpeg
+  command: make install chdir=/tmp/mozjpeg-{{ software.mozjpeg.version }}
   when: result.rc != 0 or result.stderr.split()[2] != software.mozjpeg.version
+  notify:
+    - run ldconfig
