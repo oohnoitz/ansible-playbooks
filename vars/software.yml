@@ -18,7 +18,7 @@ software:
   imagemagick:
     version: "6.9.0-6"
   iojs:
-    version: "1.3.0"
+    version: "1.4.1"
   geoip:
     version: "1.6.4"
   kafka:
@@ -72,7 +72,7 @@ download:
   kafka:
     url: "http://mirror.jii.moe/software/kafka/kafka_{{ software.kafka.scala }}-{{ software.kafka.version }}.tgz"
   mozjpeg:
-    url: "https://github.com/mozilla/mozjpeg.git"
+    url: "http://mirror.jii.moe/software/mozjpeg/mozjpeg-{{ software.mozjpeg.version }}.tar.gz"
   mysql:
     url: "http://mirror.jii.moe/software/mariadb/mariadb-{{ software.mysql.version }}-linux-x86_64.tar.gz"
     url_glibc0214: "http://mirror.jii.moe/software/mariadb/mariadb-{{ software.mysql.version }}-linux-glibc_214-x86_64.tar.gz"
@@ -87,7 +87,7 @@ download:
   sphinxsearch:
     url: "http://mirror.jii.moe/software/sphinxsearch/sphinx-{{ software.sphinxsearch.version }}-release.tar.gz"
   vips:
-    url: "https://github.com/jcupitt/libvips.git"
+    url: "http://mirror.jii.moe/software/vips/vips-{{ software.vips.version }}.tar.gz"
     dep:
       libwebp: "http://mirror.jii.moe/software/libwebp/libwebp-{{ software.vips.dep.libwebp }}.tar.gz"
   zopfli:

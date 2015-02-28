@@ -37,24 +37,24 @@
   command: make install chdir=/tmp/libwebp-{{ software.vips.dep.libwebp }}
   when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
 
-- name: clone
-  git: repo={{ download.vips.url }} dest=/tmp/libvips
+- name: download
+  get_url: url={{ download.vips.url }} dest=/tmp/{{ download.vips.url | basename }}
   when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
 
-- name: bootstrap
-  command: ./bootstrap.sh chdir=/tmp/libvips
+- name: extract
+  unarchive: src=/tmp/{{ download.vips.url | basename }} dest=/tmp copy=no
   when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
 
 - name: configure
-  command: ./configure chdir=/tmp/libvips
+  command: ./configure chdir=/tmp/vips-{{ software.vips.version }}
   when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
 
 - name: make
-  command: make -j{{ ansible_processor_cores }} chdir=/tmp/libvips
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/vips-{{ software.vips.version }}
   when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
 
 - name: make install
-  command: make install chdir=/tmp/libvips
+  command: make install chdir=/tmp/vips-{{ software.vips.version }}
   when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
   notify:
     - run ldconfig
