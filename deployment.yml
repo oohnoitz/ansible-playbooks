@@ -9,6 +9,7 @@
     - { role: common }
 
     - { role: geoip, tags: ['bind', 'geoip'] }
+    - { role: mozjpeg, tags: ['mozjpeg'] }
     - { role: imagemagick, tags: ['imagemagick'] }
     - { role: vips, tags: ['vips'] }
     - { role: zopfli, tags: ['zopfli'] }
