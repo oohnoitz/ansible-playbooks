@@ -44,8 +44,6 @@
 - name: bootstrap
   command: ./bootstrap.sh chdir=/tmp/libvips
   when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
-  notify:
-    - run ldconfig
 
 - name: configure
   command: ./configure chdir=/tmp/libvips
@@ -58,3 +56,5 @@
 - name: make install
   command: make install chdir=/tmp/libvips
   when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
+  notify:
+    - run ldconfig
