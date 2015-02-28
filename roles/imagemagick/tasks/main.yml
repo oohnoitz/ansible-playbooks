@@ -11,6 +11,9 @@
   with_items:
     - libfreetype6-dev
     - libjpeg-dev
+    - libjpeg-turbo-progs
+    - libjpeg62-turbo
+    - libjpeg62-turbo-dev
     - libpng12-dev
     - libx11-dev
     - libxext-dev
