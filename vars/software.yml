@@ -8,13 +8,13 @@ software:
   elasticsearch:
     version: "1.4.4"
   ffmpeg:
-    version: "master"
+    version: "2.6"
     dep:
-      yasm: "1.2.0"
-      libogg: "1.3.1"
+      yasm: "1.3.0"
+      libogg: "1.3.2"
       libopus: "1.1"
-      libvorbis: "1.3.4"
-      libvpx: "master"
+      libvorbis: "1.3.5"
+      libvpx: "1.3.0"
   imagemagick:
     version: "6.9.0-6"
   iojs:
@@ -55,13 +55,13 @@ download:
   elasticsearch:
     url: "http://mirror.jii.moe/software/elasticsearch/elasticsearch-{{ software.elasticsearch.version }}.tar.gz"
   ffmpeg:
-    url: "git://source.ffmpeg.org/ffmpeg.git"
+    url: "http://mirror.jii.moe/software/ffmpeg/ffmpeg-{{ software.ffmpeg.version }}.tar.gz"
     dep:
-      yasm: "git://github.com/yasm/yasm.git"
+      yasm: "http://mirror.jii.moe/software/yasm/yasm-{{ software.ffmpeg.dep.yasm }}.tar.gz"
       libogg: "http://mirror.jii.moe/software/libogg/libogg-{{ software.ffmpeg.dep.libogg }}.tar.gz"
-      libopus: "http://mirror.jii.moe/software/opus/opus-{{ software.ffmpeg.dep.libopus }}.tar.gz"
+      libopus: "http://mirror.jii.moe/software/libopus/opus-{{ software.ffmpeg.dep.libopus }}.tar.gz"
       libvorbis: "http://mirror.jii.moe/software/libvorbis/libvorbis-{{ software.ffmpeg.dep.libvorbis }}.tar.gz"
-      libvpx: "http://git.chromium.org/webm/libvpx.git"
+      libvpx: "http://mirror.jii.moe/software/libvpx/libvpx-{{ software.ffmpeg.dep.libvpx }}.tar.bz2"
       libx264: "http://git.videolan.org/git/x264.git"
   imagemagick:
     url: "http://mirror.jii.moe/software/imagemagick/ImageMagick-{{ software.imagemagick.version }}.tar.gz"

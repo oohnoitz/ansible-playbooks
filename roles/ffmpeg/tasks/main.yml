@@ -9,7 +9,6 @@
 - name: install dependencies and packages
   apt: pkg={{ item }} state=installed
   with_items:
-    - libtool
     - libass-dev
     - libgpac-dev
     - libtheora-dev
@@ -19,20 +18,24 @@
   when: result.rc != 0
 
 
-- name: yasm | clone
-  git: repo={{ download.ffmpeg.dep.yasm }} version=v{{ software.ffmpeg.dep.yasm }} dest=/tmp/yasm
+- name: yasm | download
+  get_url: url={{ download.ffmpeg.dep.yasm }} dest=/tmp/{{ download.ffmpeg.dep.yasm | basename }}
   when: result.rc != 0
 
-- name: yasm | autogen
-  command: ./autogen.sh chdir=/tmp/yasm
+- name: yasm | extract
+  unarchive: src=/tmp/{{ download.ffmpeg.dep.yasm | basename }} dest=/tmp copy=no
+  when: result.rc != 0
+
+- name: yasm | configure
+  command: ./configure chdir=/tmp/yasm-{{ software.ffmpeg.dep.yasm }}
   when: result.rc != 0
 
 - name: yasm | make
-  command: make -j{{ ansible_processor_cores }} chdir=/tmp/yasm
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/yasm-{{ software.ffmpeg.dep.yasm }}
   when: result.rc != 0
 
 - name: yasm | make install
-  command: make install chdir=/tmp/yasm
+  command: make install chdir=/tmp/yasm-{{ software.ffmpeg.dep.yasm }}
   when: result.rc != 0
 
 
@@ -99,20 +102,24 @@
   when: result.rc != 0
 
 
-- name: libvpx | clone
-  git: repo={{ download.ffmpeg.dep.libvpx }} dest=/tmp/libvpx
+- name: libvpx | download
+  get_url: url={{ download.ffmpeg.dep.libvpx }} dest=/tmp/{{ download.ffmpeg.dep.libvpx | basename }}
+  when: result.rc != 0
+
+- name: libvpx | extract
+  unarchive: src=/tmp/{{ download.ffmpeg.dep.libvpx | basename }} dest=/tmp copy=no
   when: result.rc != 0
 
 - name: libvpx | configure
-  command: ./configure chdir=/tmp/libvpx
+  command: ./configure chdir=/tmp/libvpx-{{ software.ffmpeg.dep.libvpx }}
   when: result.rc != 0
 
 - name: libvpx | make
-  command: make -j{{ ansible_processor_cores }} chdir=/tmp/libvpx
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/libvpx-{{ software.ffmpeg.dep.libvpx }}
   when: result.rc != 0
 
 - name: libvpx | make install
-  command: make install chdir=/tmp/libvpx
+  command: make install chdir=/tmp/libvpx-{{ software.ffmpeg.dep.libvpx }}
   when: result.rc != 0
 
 
@@ -137,8 +144,8 @@
   when: result.rc != 0
 
 
-- name: clone
-  git: repo={{ download.ffmpeg.url }} dest=/tmp/ffmpeg
+- name: download
+  get_url: repo={{ download.ffmpeg.url }} dest=/tmp/{{ download.ffmpeg.url | basename }}
   when: result.rc != 0
 
 - name: configure
