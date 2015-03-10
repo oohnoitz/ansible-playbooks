@@ -15,147 +15,147 @@
     - libtool
     - texi2html
     - zlib1g-dev
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 
 - name: yasm | download
   get_url: url={{ download.ffmpeg.dep.yasm }} dest=/tmp/{{ download.ffmpeg.dep.yasm | basename }}
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: yasm | extract
   unarchive: src=/tmp/{{ download.ffmpeg.dep.yasm | basename }} dest=/tmp copy=no
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: yasm | configure
   command: ./configure chdir=/tmp/yasm-{{ software.ffmpeg.dep.yasm }}
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: yasm | make
   command: make -j{{ ansible_processor_cores }} chdir=/tmp/yasm-{{ software.ffmpeg.dep.yasm }}
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: yasm | make install
   command: make install chdir=/tmp/yasm-{{ software.ffmpeg.dep.yasm }}
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 
 - name: libogg | download
   get_url: url={{ download.ffmpeg.dep.libogg }} dest=/tmp/{{ download.ffmpeg.dep.libogg | basename }}
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: libogg | extract
   unarchive: src=/tmp/{{ download.ffmpeg.dep.libogg | basename }} dest=/tmp copy=no
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: libogg | configure
   command: ./configure --disable-shared chdir=/tmp/libogg-{{ software.ffmpeg.dep.libogg }}
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: libogg | make
   command: make -j{{ ansible_processor_cores }} chdir=/tmp/libogg-{{ software.ffmpeg.dep.libogg }}
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: libogg | make install
   command: make install chdir=/tmp/libogg-{{ software.ffmpeg.dep.libogg }}
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 
 - name: libopus | download
   get_url: url={{ download.ffmpeg.dep.libopus }} dest=/tmp/{{ download.ffmpeg.dep.libopus | basename }}
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: libopus | extract
   unarchive: src=/tmp/{{ download.ffmpeg.dep.libopus | basename }} dest=/tmp copy=no
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: libopus | configure
   command: ./configure --disable-shared chdir=/tmp/opus-{{ software.ffmpeg.dep.libopus }}
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: libopus | make
   command: make -j{{ ansible_processor_cores }} chdir=/tmp/opus-{{ software.ffmpeg.dep.libopus }}
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: libopus | make install
   command: make install chdir=/tmp/opus-{{ software.ffmpeg.dep.libopus }}
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 
 - name: libvorbis | download
   get_url: url={{ download.ffmpeg.dep.libvorbis }} dest=/tmp/{{ download.ffmpeg.dep.libvorbis | basename }}
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: libvorbis | extract
   unarchive: src=/tmp/{{ download.ffmpeg.dep.libvorbis | basename }} dest=/tmp copy=no
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: libvorbis | configure
   command: ./configure --disable-shared chdir=/tmp/libvorbis-{{ software.ffmpeg.dep.libvorbis }}
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: libvorbis | make
   command: make -j{{ ansible_processor_cores }} chdir=/tmp/libvorbis-{{ software.ffmpeg.dep.libvorbis }}
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: libvorbis | make install
   command: make install chdir=/tmp/libvorbis-{{ software.ffmpeg.dep.libvorbis }}
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 
 - name: libvpx | download
   get_url: url={{ download.ffmpeg.dep.libvpx }} dest=/tmp/{{ download.ffmpeg.dep.libvpx | basename }}
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: libvpx | extract
   unarchive: src=/tmp/{{ download.ffmpeg.dep.libvpx | basename }} dest=/tmp copy=no
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: libvpx | configure
   command: ./configure chdir=/tmp/libvpx-{{ software.ffmpeg.dep.libvpx }}
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: libvpx | make
   command: make -j{{ ansible_processor_cores }} chdir=/tmp/libvpx-{{ software.ffmpeg.dep.libvpx }}
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: libvpx | make install
   command: make install chdir=/tmp/libvpx-{{ software.ffmpeg.dep.libvpx }}
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 
 - name: libx264 | clone
   git: repo={{ download.ffmpeg.dep.libx264 }} dest=/tmp/libx264
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: libx264 | configure
   command: ./configure --enable-static chdir=/tmp/libx264
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: libx264 | make
   command: make -j{{ ansible_processor_cores }} chdir=/tmp/libx264
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: libx264 | make install
   command: make install chdir=/tmp/libx264
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: libx264 | make distclean
   command: make distclean chdir=/tmp/libx264
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 
 - name: download
   get_url: repo={{ download.ffmpeg.url }} dest=/tmp/{{ download.ffmpeg.url | basename }}
-  when: result.rc != 0
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: configure
-  command: ./configure --extra-libs="-ldl" --enable-gpl --enable-libass --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 chdir=/tmp/ffmpeg
-  when: result.rc != 0
+  command: ./configure --extra-libs="-ldl" --enable-gpl --enable-libass --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 chdir=/tmp/ffmpeg-{{ software.ffmpeg.version }}
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: make
-  command: make -j{{ ansible_processor_cores }} chdir=/tmp/ffmpeg
-  when: result.rc != 0
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/ffmpeg-{{ software.ffmpeg.version }}
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: make install
-  command: make install chdir=/tmp/ffmpeg
-  when: result.rc != 0
+  command: make install chdir=/tmp/ffmpeg-{{ software.ffmpeg.version }}
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
