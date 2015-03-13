@@ -61,7 +61,7 @@ download:
       libogg: "http://mirror.jii.moe/software/libogg/libogg-{{ software.ffmpeg.dep.libogg }}.tar.gz"
       libopus: "http://mirror.jii.moe/software/libopus/opus-{{ software.ffmpeg.dep.libopus }}.tar.gz"
       libvorbis: "http://mirror.jii.moe/software/libvorbis/libvorbis-{{ software.ffmpeg.dep.libvorbis }}.tar.gz"
-      libvpx: "http://mirror.jii.moe/software/libvpx/libvpx-{{ software.ffmpeg.dep.libvpx }}.tar.bz2"
+      libvpx: "http://mirror.jii.moe/software/libvpx/libvpx-v{{ software.ffmpeg.dep.libvpx }}.tar.bz2"
       libx264: "http://git.videolan.org/git/x264.git"
   imagemagick:
     url: "http://mirror.jii.moe/software/imagemagick/ImageMagick-{{ software.imagemagick.version }}.tar.gz"

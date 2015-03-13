@@ -111,15 +111,15 @@
   when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: libvpx | configure
-  command: ./configure chdir=/tmp/libvpx-{{ software.ffmpeg.dep.libvpx }}
+  command: ./configure chdir=/tmp/libvpx-v{{ software.ffmpeg.dep.libvpx }}
   when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: libvpx | make
-  command: make -j{{ ansible_processor_cores }} chdir=/tmp/libvpx-{{ software.ffmpeg.dep.libvpx }}
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/libvpx-v{{ software.ffmpeg.dep.libvpx }}
   when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 - name: libvpx | make install
-  command: make install chdir=/tmp/libvpx-{{ software.ffmpeg.dep.libvpx }}
+  command: make install chdir=/tmp/libvpx-v{{ software.ffmpeg.dep.libvpx }}
   when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 
