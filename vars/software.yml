@@ -2,13 +2,13 @@
 
 software:
   bind:
-    version: "9.10.1"
+    version: "9.10.2"
   cassandra:
-    version: "2.1.3"
+    version: "2.1.4"
   elasticsearch:
-    version: "1.4.4"
+    version: "1.5.1"
   ffmpeg:
-    version: "2.6"
+    version: "2.6.2"
     dep:
       yasm: "1.3.0"
       libogg: "1.3.2"
@@ -16,30 +16,28 @@ software:
       libvorbis: "1.3.5"
       libvpx: "1.3.0"
   imagemagick:
-    version: "6.9.0-6"
+    version: "6.9.1-2"
   iojs:
-    version: "1.4.1"
+    version: "1.8.1"
   geoip:
     version: "1.6.4"
   kafka:
     scala: "2.11"
-    version: "0.8.2.0"
+    version: "0.8.2.1"
   mozjpeg:
     version: "3.0"
   mysql:
-    version: "10.0.16"
+    version: "10.0.17"
   nginx:
-    version: "1.7.10"
-  nodejs:
-    version: "0.12.0"
+    version: "1.8.0"
   php:
-    version: "5.6.6"
+    version: "5.6.8"
   redis:
-    version: "2.8.19"
+    version: "3.0.0"
   scala:
     version: "2.11.5"
   sphinxsearch:
-    version: "2.2.7"
+    version: "2.2.9"
   vips:
     version: "7.42.3"
     dep:
@@ -76,8 +74,6 @@ download:
   mysql:
     url: "http://mirror.jii.moe/software/mariadb/mariadb-{{ software.mysql.version }}-linux-x86_64.tar.gz"
     url_glibc0214: "http://mirror.jii.moe/software/mariadb/mariadb-{{ software.mysql.version }}-linux-glibc_214-x86_64.tar.gz"
-  nodejs:
-    url: "http://mirror.jii.moe/software/node/node-v{{ software.nodejs.version }}.tar.gz"
   php:
     url: "http://mirror.jii.moe/software/php/php-{{ software.php.version }}.tar.gz"
   scala:

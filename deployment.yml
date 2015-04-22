@@ -29,7 +29,6 @@
     - { role: kafka, tags: ['kafka'] }
     - { role: rabbitmq, tags: ['rabbitmq'] }
 
-    - { role: nodejs, tags: ['nodejs'] }
     - { role: iojs, tags: ['iojs'] }
     - { role: php, tags: ['php'] }
     - { role: hhvm, tags: ['hhvm'] }
