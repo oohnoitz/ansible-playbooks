@@ -39,9 +39,9 @@ software:
   sphinxsearch:
     version: "2.2.9"
   vips:
-    version: "7.42.3"
+    version: "8.0.2"
     dep:
-      libwebp: "0.4.2"
+      libwebp: "0.4.3"
   zopfli:
     version: "1.0.0"
 
