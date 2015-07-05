@@ -25,15 +25,15 @@
   when: result.rc != 0 or result.stderr.split()[2] != software.mozjpeg.version
 
 - name: configure
-  command: ./configure chdir=/tmp/mozjpeg-{{ software.mozjpeg.version }}
+  command: ./configure chdir=/tmp/mozjpeg
   when: result.rc != 0 or result.stderr.split()[2] != software.mozjpeg.version
 
 - name: make
-  command: make -j{{ ansible_processor_cores }} chdir=/tmp/mozjpeg-{{ software.mozjpeg.version }}
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/mozjpeg
   when: result.rc != 0 or result.stderr.split()[2] != software.mozjpeg.version
 
 - name: make install
-  command: make install chdir=/tmp/mozjpeg-{{ software.mozjpeg.version }}
+  command: make install chdir=/tmp/mozjpeg
   when: result.rc != 0 or result.stderr.split()[2] != software.mozjpeg.version
   notify:
     - run ldconfig
