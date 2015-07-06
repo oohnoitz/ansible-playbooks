@@ -1,60 +1,16 @@
 ---
 
-- name: get glibc version
-  command: /usr/bin/ldd --version
-  register: lld_version
-  ignore_errors: True
-  changed_when: False
-
-- name: get current version
-  command: /usr/local/mysql/bin/mysql -V
-  register: result
-  ignore_errors: True
-  changed_when: False
-
-- name: create user
-  user: name=mysql home=/usr/local/mysql system=yes
-
 - name: install dependencies and packages
   apt: pkg={{ item }} state=installed
   with_items:
     - libaio-dev
-  when: result.rc != 0 or  result.stdout.split()[4].rstrip(',') != "{{ software.mysql.version }}-MariaDB"
+    - python-software-properties
 
-- name: download (glibc)
-  get_url: url={{ download.mysql.url }} dest=/tmp/{{ download.mysql.url | basename }}
-  when: lld_version.stdout.split()[4] | float  < 2.14 and (result.rc != 0 or  result.stdout.split()[4].rstrip(',') != "{{ software.mysql.version }}-MariaDB")
+- name: add mariadb pgp key
+  apt_key: keyserver=keyserver.ubuntu.com id=0xcbcb082a1bb943db
 
-- name: download (glibc 2.14+)
-  get_url: url={{ download.mysql.url_glibc0214 }} dest=/tmp/{{ download.mysql.url | basename }}
-  when: lld_version.stdout.split()[4] | float >= 2.14 and (result.rc != 0 or  result.stdout.split()[4].rstrip(',') != "{{ software.mysql.version }}-MariaDB")
+- name: add repository
+  apt_repository: repo='deb http://ftp.osuosl.org/pub/mariadb/repo/10.0/debian jessie main' state=present
 
-- name: extract
-  unarchive: src=/tmp/{{ download.mysql.url | basename }} dest=/tmp copy=no
-  when: result.rc != 0 or  result.stdout.split()[4].rstrip(',') != "{{ software.mysql.version }}-MariaDB"
-
-- name: replace binaries {{ software.mysql.version }}
-  shell: if [ -d /tmp/mariadb-{{ software.mysql.version }}-linux-x86_64 ]; then rm -rf /usr/local/mysql; mv /tmp/mariadb-{{ software.mysql.version }}-linux-x86_64 /usr/local/mysql; fi
-  when: result.rc != 0 or  result.stdout.split()[4].rstrip(',') != "{{ software.mysql.version }}-MariaDB"
-
-- name: chown installation
-  file: path=/usr/local/mysql state=directory owner=mysql group=mysql recurse=yes
-
-- name: create temp directory
-  file: path=/usr/local/mysql/temp state=directory owner=mysql group=mysql recurse=yes
-
-- name: create data directory
-  file: path=/var/data/mysql/data state=directory owner=mysql group=mysql recurse=yes
-
-- name: install database
-  command: /usr/local/mysql/scripts/mysql_install_db --user=mysql --datadir=/var/data/mysql/data chdir=/usr/local/mysql
-  when: result.rc != 0
-
-- name: remove conflicting my.cnf
-  file: src=/etc/my.cnf state=absent
-  when: result.rc != 0
-
-- name: copy ldconfig file
-  copy: src=../files/mysql.so.conf dest=/etc/ld.so.conf.d/mysql.so.conf
-  notify:
-  - run ldconfig
+- name: install mariadb-server
+  apt: pkg=mariadb-server state=latest update_cache=yes

@@ -26,8 +26,6 @@ software:
     version: "0.8.2.1"
   mozjpeg:
     version: "3.1"
-  mysql:
-    version: "10.0.19"
   nginx:
     version: "1.9.1"
   php:
@@ -71,9 +69,6 @@ download:
     url: "http://mirror.jii.moe/software/kafka/kafka_{{ software.kafka.scala }}-{{ software.kafka.version }}.tgz"
   mozjpeg:
     url: "http://mirror.jii.moe/software/mozjpeg/mozjpeg-{{ software.mozjpeg.version }}.tar.gz"
-  mysql:
-    url: "http://mirror.jii.moe/software/mariadb/mariadb-{{ software.mysql.version }}-linux-x86_64.tar.gz"
-    url_glibc0214: "http://mirror.jii.moe/software/mariadb/mariadb-{{ software.mysql.version }}-linux-glibc_214-x86_64.tar.gz"
   php:
     url: "http://mirror.jii.moe/software/php/php-{{ software.php.version }}.tar.gz"
   scala:
