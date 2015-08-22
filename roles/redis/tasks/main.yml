@@ -27,3 +27,10 @@
 - name: install {{ software.redis.version }}
   command: make install chdir=/tmp/redis-{{ software.redis.version }}
   when: result.rc != 0 or result.stdout.split()[1] != software.redis.version
+
+- name: clean up
+  command: rm -rf {{ item}}
+  with_items:
+    - /tmp/{{ download.redis.url | basename }}
+    - /tmp/redis-{{ software.redis.version }}
+  when: result.rc != 0 or result.stdout.split()[1] != software.redis.version

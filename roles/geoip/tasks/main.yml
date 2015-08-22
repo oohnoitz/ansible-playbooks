@@ -14,3 +14,9 @@
 
 - name: make install {{ software.geoip.version }}
   command: make install chdir=/tmp/GeoIP-{{ software.geoip.version }}
+
+- name: clean up
+  command: rm -rf {{ item}}
+  with_items:
+    - /tmp/{{ download.geoip.url | basename }}
+    - /tmp/GeoIP-{{ software.geoip.version }}

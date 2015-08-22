@@ -32,3 +32,10 @@
 - name: make install {{ software.iojs.version }}
   command: make install chdir=/tmp/iojs-v{{ software.iojs.version }}
   when: result.rc != 0 or result.stdout.lstrip('v') != software.iojs.version
+
+- name: clean up
+  command: rm -rf {{ item}}
+  with_items:
+    - /tmp/{{ download.iojs.url | basename }}
+    - /tmp/iojs-v{{ software.iojs.version }}
+  when: result.rc != 0 or result.stdout.lstrip('v') != software.iojs.version

@@ -12,5 +12,8 @@
 - name: add repository
   apt_repository: repo='deb http://ftp.osuosl.org/pub/mariadb/repo/10.0/debian jessie main' state=present
 
-- name: install mariadb-server
-  apt: pkg=mariadb-server state=latest update_cache=yes
+- name: install mariadb
+  apt: pkg={{ item }} state=latest update_cache=yes
+  with_items:
+    - mariadb-server
+    - libmariadbclient-dev

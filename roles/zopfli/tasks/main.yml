@@ -21,3 +21,10 @@
 - name: install {{ software.zopfli.version }}
   shell: if [ -f /tmp/zopfli-{{ software.zopfli.version }}/zopfli ]; then cp /tmp/zopfli-{{ software.zopfli.version }}/zopfli /usr/local/bin/zopfli; fi
   when: result.rc != 0
+
+- name: clean up
+  command: rm -rf {{ item}}
+  with_items:
+    - /tmp/{{ download.zopfli.url | basename }}
+    - /tmp/zopfli-{{ software.zopfli.version }}
+  when: result.rc != 0

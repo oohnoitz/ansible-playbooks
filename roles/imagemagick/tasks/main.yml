@@ -42,3 +42,10 @@
   notify:
     - run ldconfig
   when: result.rc != 0 or result.stdout.split()[2] != software.imagemagick.version
+
+- name: clean up
+  command: rm -rf {{ item}}
+  with_items:
+    - /tmp/{{ download.imagemagick.url | basename }}
+    - /tmp/ImageMagick-{{ software.imagemagick.version }}
+  when: result.rc != 0 or result.stdout.split()[2] != software.imagemagick.version

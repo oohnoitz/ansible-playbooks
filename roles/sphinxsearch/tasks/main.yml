@@ -25,3 +25,10 @@
 - name: make install {{ software.sphinxsearch.version }}
   command: make install chdir=/tmp/sphinx-{{ software.sphinxsearch.version }}-release
   when: result.rc != 0 or result.stdout.split()[1] != '{{ software.sphinxsearch.version }}-id64-release'
+
+- name: clean up
+  command: rm -rf {{ item}}
+  with_items:
+    - /tmp/{{ download.sphinxsearch.url | basename }}
+    - /tmp/sphinx-{{ software.sphinxsearch.version }}-release
+  when: result.rc != 0 or result.stdout.split()[1] != '{{ software.sphinxsearch.version }}-id64-release'

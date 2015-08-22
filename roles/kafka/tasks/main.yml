@@ -33,3 +33,10 @@
 - name: replace binaries
   shell: if [ -d /tmp/kafka_{{ software.kafka.scala }}-{{ software.kafka.version}} ]; then rm -rf /usr/local/kafka; mv /tmp/kafka_{{ software.kafka.scala }}-{{ software.kafka.version}} /usr/local/kafka; fi
   when: result.stdout != "0"
+
+- name: clean up
+  command: rm -rf {{ item}}
+  with_items:
+    - /tmp/{{ download.scala.url | basename }}
+    - /tmp/{{ download.kafka.url | basename }}
+  when: result.stdout != "0"

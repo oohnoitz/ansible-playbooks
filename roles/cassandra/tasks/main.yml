@@ -23,3 +23,9 @@
 - name: replace binaries {{ software.cassandra.version }}
   shell: if [ -d /tmp/apache-cassandra-{{ software.cassandra.version }} ]; then rm -rf /usr/local/cassandra; mv /tmp/apache-cassandra-{{ software.cassandra.version }} /usr/local/cassandra; fi
   when: result.rc != 0 or result.stdout != software.cassandra.version
+
+- name: clean up
+  command: rm -rf {{ item}}
+  with_items:
+    - /tmp/{{ download.cassandra.url | basename }}
+  when: result.rc != 0 or result.stdout != software.cassandra.version

@@ -29,3 +29,9 @@
 
 - name: create data directory
   file: path=/var/data/elasticsearch state=directory recurse=yes
+
+- name: clean up
+  command: rm -rf {{ item}}
+  with_items:
+    - /tmp/{{ download.elasticsearch.url | basename }}
+  when: result.rc != 0 or result.stdout.split()[1].rstrip(',') != software.elasticsearch.version

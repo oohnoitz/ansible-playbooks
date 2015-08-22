@@ -37,3 +37,10 @@
   when: result.rc != 0 or result.stderr.split()[2] != software.mozjpeg.version
   notify:
     - run ldconfig
+
+- name: clean up
+  command: rm -rf {{ item}}
+  with_items:
+    - /tmp/{{ download.mozjpeg.url | basename }}
+    - /tmp/mozjpeg
+  when: result.rc != 0 or result.stderr.split()[2] != software.mozjpeg.version

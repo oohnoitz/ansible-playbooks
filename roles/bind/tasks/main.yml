@@ -32,6 +32,13 @@
   command: make -j{{ ansible_processor_cores }} chdir=/tmp/bind-{{ software.bind.version }}
   when: result.rc != 0 or result.stdout.split()[1] != software.bind.version
 
-- name: make install {{ software.bind.version }}
+- name: make install
   command: make install chdir=/tmp/bind-{{ software.bind.version }}
+  when: result.rc != 0 or result.stdout.split()[1] != software.bind.version
+
+- name: clean up
+  command: rm -rf {{ item}}
+  with_items:
+    - /tmp/{{ download.bind.url | basename }}
+    - /tmp/bind-{{ software.bind.version }}
   when: result.rc != 0 or result.stdout.split()[1] != software.bind.version

@@ -38,6 +38,13 @@
   command: make install chdir=/tmp/yasm-{{ software.ffmpeg.dep.yasm }}
   when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
+- name: yasm | clean up
+  command: rm -rf {{ item}}
+  with_items:
+    - /tmp/{{ download.ffmpeg.dep.yasm | basename }}
+    - /tmp/yasm-{{ software.ffmpeg.dep.yasm }}
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
+
 
 - name: libogg | download
   get_url: url={{ download.ffmpeg.dep.libogg }} dest=/tmp/{{ download.ffmpeg.dep.libogg | basename }}
@@ -57,6 +64,13 @@
 
 - name: libogg | make install
   command: make install chdir=/tmp/libogg-{{ software.ffmpeg.dep.libogg }}
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
+
+- name: libogg | clean up
+  command: rm -rf {{ item}}
+  with_items:
+    - /tmp/{{ download.ffmpeg.dep.libogg | basename }}
+    - /tmp/libogg-{{ software.ffmpeg.dep.libogg }}
   when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 
@@ -80,6 +94,13 @@
   command: make install chdir=/tmp/opus-{{ software.ffmpeg.dep.libopus }}
   when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
+- name: libopus | clean up
+  command: rm -rf {{ item}}
+  with_items:
+    - /tmp/{{ download.ffmpeg.dep.libopus | basename }}
+    - /tmp/opus-{{ software.ffmpeg.dep.libopus }}
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
+
 
 - name: libvorbis | download
   get_url: url={{ download.ffmpeg.dep.libvorbis }} dest=/tmp/{{ download.ffmpeg.dep.libvorbis | basename }}
@@ -99,6 +120,13 @@
 
 - name: libvorbis | make install
   command: make install chdir=/tmp/libvorbis-{{ software.ffmpeg.dep.libvorbis }}
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
+
+- name: libvorbis | clean up
+  command: rm -rf {{ item}}
+  with_items:
+    - /tmp/{{ download.ffmpeg.dep.libvorbis | basename }}
+    - /tmp/libvorbis-{{ software.ffmpeg.dep.libvorbis }}
   when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 
@@ -122,6 +150,13 @@
   command: make install chdir=/tmp/libvpx-v{{ software.ffmpeg.dep.libvpx }}
   when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
+- name: libvpx | clean up
+  command: rm -rf {{ item}}
+  with_items:
+    - /tmp/{{ download.ffmpeg.dep.libvpx | basename }}
+    - /tmp/libvpx-v{{ software.ffmpeg.dep.libvpx }}
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
+
 
 - name: libx264 | clone
   git: repo={{ download.ffmpeg.dep.libx264 }} dest=/tmp/libx264
@@ -143,6 +178,12 @@
   command: make distclean chdir=/tmp/libx264
   when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
+- name: libx264 | clean up
+  command: rm -rf {{ item}}
+  with_items:
+    - /tmp/libx264
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
+
 
 - name: download
   get_url: url={{ download.ffmpeg.url }} dest=/tmp/{{ download.ffmpeg.url | basename }}
@@ -162,4 +203,11 @@
 
 - name: make install
   command: make install chdir=/tmp/ffmpeg-{{ software.ffmpeg.version }}
+  when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
+
+- name: clean up
+  command: rm -rf {{ item}}
+  with_items:
+    - /tmp/{{ download.ffmpeg.url | basename }}
+    - /tmp/ffmpeg-{{ software.ffmpeg.version }}
   when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version

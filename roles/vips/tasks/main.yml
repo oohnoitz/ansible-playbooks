@@ -59,3 +59,11 @@
   when: result.rc != 0 or result.stdout.split()[1].split('-')[0] != software.vips.version
   notify:
     - run ldconfig
+
+- name: clean up
+  command: rm -rf {{ item}}
+  with_items:
+    - /tmp/{{ download.vips.dep.libwebp | basename }}
+    - /tmp/{{ download.vips.url | basename }}
+    - /tmp/vips-{{ software.vips.version }}
+  when: result.rc != 0 or result.stdout.split()[1] != '{{ software.sphinxsearch.version }}-id64-release'
