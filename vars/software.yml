@@ -17,8 +17,6 @@ software:
       libvpx: "1.3.0"
   imagemagick:
     version: "6.9.2-0"
-  iojs:
-    version: "3.1.0"
   geoip:
     version: "1.6.6"
   kafka:
@@ -26,6 +24,8 @@ software:
     version: "0.8.2.1"
   mozjpeg:
     version: "3.1"
+  nodejs:
+    version: "4.0.0"
   nginx:
     version: "1.9.4"
   php:
@@ -61,14 +61,14 @@ download:
       libx264: "http://git.videolan.org/git/x264.git"
   imagemagick:
     url: "http://mirror.jii.moe/software/imagemagick/ImageMagick-{{ software.imagemagick.version }}.tar.gz"
-  iojs:
-    url: "http://mirror.jii.moe/software/iojs/iojs-v{{ software.iojs.version }}.tar.xz"
   geoip:
     url: "http://mirror.jii.moe/software/geoip/GeoIP-{{ software.geoip.version }}.tar.gz"
   kafka:
     url: "http://mirror.jii.moe/software/kafka/kafka_{{ software.kafka.scala }}-{{ software.kafka.version }}.tgz"
   mozjpeg:
     url: "http://mirror.jii.moe/software/mozjpeg/mozjpeg-{{ software.mozjpeg.version }}.tar.gz"
+  nodejs:
+    url: "http://mirror.jii.moe/software/nodejs/node-v{{ software.nodejs.version }}.tar.xz"
   php:
     url: "http://mirror.jii.moe/software/php/php-{{ software.php.version }}.tar.gz"
   scala:
