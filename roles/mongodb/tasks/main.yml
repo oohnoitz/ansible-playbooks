@@ -1,10 +1,10 @@
 ---
 
-- name: install tokumx-mongodb signing key
-  apt_key: keyserver=keyserver.ubuntu.com id=505A7412 state=present
+- name: install mongodb signing key
+  apt_key: keyserver=keyserver.ubuntu.com id=7F0CEB10 state=present
 
 - name: add repository
-  apt_repository: repo='deb [arch=amd64] http://s3.amazonaws.com/tokumx-debs wheezy main'
+  apt_repository: repo='deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/3.0 main'
 
-- name: install tokumx-mongodb
-  apt: pkg=tokumx state=latest
+- name: install mongodb
+  apt: pkg=mongodb-org state=latest
