@@ -154,7 +154,7 @@
   command: rm -rf {{ item}}
   with_items:
     - /tmp/{{ download.ffmpeg.dep.libvpx | basename }}
-    - /tmp/libvpx-v{{ software.ffmpeg.dep.libvpx }}
+    - /tmp/libvpx-{{ software.ffmpeg.dep.libvpx }}
   when: result.rc != 0 or result.stdout.split()[2] != software.ffmpeg.version
 
 
