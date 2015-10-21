@@ -6,6 +6,28 @@
   ignore_errors: True
   changed_when: False
 
+- name: libbrotli | clone
+  git: https://github.com/bagder/libbrotli.git dest=/tmp/libbrotli
+  when: result.rc != 0 or result.stderr.split('/')[1] != software.nginx.version
+
+- name: libbrotli | autogen
+  command: ./autogen.sh chdir=/tmp/libbrotli
+  when: result.rc != 0 or result.stderr.split('/')[1] != software.nginx.version
+
+- name: libbrotli | configure
+  command: ./configure chdir=/tmp/libbrotli
+  when: result.rc != 0 or result.stderr.split('/')[1] != software.nginx.version
+
+- name: libbrotli | make
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/libbrotli
+  when: result.rc != 0 or result.stderr.split('/')[1] != software.nginx.version
+
+- name: libbrotli | make install {{ software.nodejs.version }}
+  command: make install chdir=/tmp/libbrotli
+  when: result.rc != 0 or result.stderr.split('/')[1] != software.nginx.version
+  notify:
+    - run ldconfig
+
 - name: clone installer
   git: repo=https://github.com/oohnoitz/nginx-installer.git dest=/tmp/nginx-installer
   when: result.rc != 0 or result.stderr.split('/')[1] != software.nginx.version
@@ -20,6 +42,7 @@
 - name: download modules
   command: ./install-module.sh {{ item }} chdir=/tmp/nginx-installer
   with_items:
+    - ngx_brotli
     - ngx_cache_purge
   when: result.rc != 0 or result.stderr.split('/')[1] != software.nginx.version
 
@@ -46,3 +69,10 @@
 
 - name: mkdir /var/www
   file: path=/var/www owner=vagrant group=vagrant state=directory recurse=true
+
+- name: clean up
+  command: rm -rf {{ item}}
+  with_items:
+    - /tmp/libbrotli
+    - /tmp/nginx-installer
+  when: result.rc != 0 or result.stdout.split()[1] != '{{ software.sphinxsearch.version }}-id64-release'
