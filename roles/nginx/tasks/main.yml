@@ -11,7 +11,7 @@
   when: result.rc != 0 or result.stderr.split('/')[1] != software.nginx.version
 
 - name: libbrotli | autogen
-  command: ./autogen.sh chdir=/tmp/libbrotli
+  shell: ./autogen.sh chdir=/tmp/libbrotli
   when: result.rc != 0 or result.stderr.split('/')[1] != software.nginx.version
 
 - name: libbrotli | configure
