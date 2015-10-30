@@ -7,7 +7,7 @@
   changed_when: False
 
 - name: libbrotli | clone
-  git: https://github.com/bagder/libbrotli.git dest=/tmp/libbrotli
+  git: repo=https://github.com/bagder/libbrotli.git dest=/tmp/libbrotli
   when: result.rc != 0 or result.stderr.split('/')[1] != software.nginx.version
 
 - name: libbrotli | autogen
