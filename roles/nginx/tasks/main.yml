@@ -75,4 +75,4 @@
   with_items:
     - /tmp/libbrotli
     - /tmp/nginx-installer
-  when: result.rc != 0 or result.stdout.split()[1] != '{{ software.sphinxsearch.version }}-id64-release'
+  when: result.rc != 0 or result.stderr.split('/')[1] != software.nginx.version
