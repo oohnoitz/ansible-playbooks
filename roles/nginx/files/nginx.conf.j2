@@ -28,6 +28,8 @@ http {
     client_max_body_size     32m;
     client_body_buffer_size  16m;
 
+    brotli             on;
+    brotli_static      on;
     gzip               on;
     gzip_static        on;
     gzip_http_version  1.1;
