@@ -4,21 +4,21 @@ software:
   bind:
     version: "9.10.2"
   cassandra:
-    version: "2.2.3"
+    version: "3.0.0"
   elasticsearch:
     version: "2.0.0"
   ffmpeg:
-    version: "2.8"
+    version: "2.8.2"
     dep:
       yasm: "1.3.0"
       libogg: "1.3.2"
       libopus: "1.1"
       libvorbis: "1.3.5"
-      libvpx: "1.4.0"
+      libvpx: "1.5.0"
   imagemagick:
-    version: "6.9.2-4"
+    version: "6.9.2-6"
   geoip:
-    version: "1.6.6"
+    version: "1.6.7"
   kafka:
     scala: "2.11"
     version: "0.8.2.2"
@@ -27,9 +27,9 @@ software:
   nodejs:
     version: "5.0.0"
   nginx:
-    version: "1.9.6"
+    version: "1.9.7"
   php:
-    version: "5.6.14"
+    version: "5.6.15"
   redis:
     version: "3.0.5"
   scala:
@@ -39,7 +39,7 @@ software:
   vips:
     version: "8.1.1"
     dep:
-      libwebp: "0.4.3"
+      libwebp: "0.4.4"
   zopfli:
     version: "1.0.0"
 
