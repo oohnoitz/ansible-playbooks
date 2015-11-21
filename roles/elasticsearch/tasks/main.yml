@@ -1,7 +1,7 @@
 ---
 
 - name: get current version
-  command: /usr/local/elasticsearch/bin/elasticsearch -v
+  command: /usr/local/elasticsearch/bin/elasticsearch --version
   register: result
   ignore_errors: True
   changed_when: False
