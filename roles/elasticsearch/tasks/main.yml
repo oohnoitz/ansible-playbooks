@@ -9,7 +9,7 @@
 - name: install dependencies and packages
   apt: pkg={{ item }} state=installed
   with_items:
-    - openjdk-7-jdk
+    - openjdk-8-jdk
   when: result.rc != 0 or result.stdout.split()[1].rstrip(',') != software.elasticsearch.version
 
 - name: download
