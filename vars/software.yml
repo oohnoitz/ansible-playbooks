@@ -45,41 +45,41 @@ software:
 
 download:
   bind:
-    url: "http://mirror.jii.moe/software/bind/bind-{{ software.bind.version }}.tar.gz"
+    url: "https://mirror.0x0.ninja/software/bind/bind-{{ software.bind.version }}.tar.gz"
   cassandra:
-    url: "http://mirror.jii.moe/software/cassandra/apache-cassandra-{{ software.cassandra.version }}-bin.tar.gz"
+    url: "https://mirror.0x0.ninja/software/cassandra/apache-cassandra-{{ software.cassandra.version }}-bin.tar.gz"
   elasticsearch:
-    url: "http://mirror.jii.moe/software/elasticsearch/elasticsearch-{{ software.elasticsearch.version }}.tar.gz"
+    url: "https://mirror.0x0.ninja/software/elasticsearch/elasticsearch-{{ software.elasticsearch.version }}.tar.gz"
   ffmpeg:
-    url: "http://mirror.jii.moe/software/ffmpeg/ffmpeg-{{ software.ffmpeg.version }}.tar.gz"
+    url: "https://mirror.0x0.ninja/software/ffmpeg/ffmpeg-{{ software.ffmpeg.version }}.tar.gz"
     dep:
-      yasm: "http://mirror.jii.moe/software/yasm/yasm-{{ software.ffmpeg.dep.yasm }}.tar.gz"
-      libogg: "http://mirror.jii.moe/software/libogg/libogg-{{ software.ffmpeg.dep.libogg }}.tar.gz"
-      libopus: "http://mirror.jii.moe/software/libopus/opus-{{ software.ffmpeg.dep.libopus }}.tar.gz"
-      libvorbis: "http://mirror.jii.moe/software/libvorbis/libvorbis-{{ software.ffmpeg.dep.libvorbis }}.tar.gz"
-      libvpx: "http://mirror.jii.moe/software/libvpx/libvpx-{{ software.ffmpeg.dep.libvpx }}.tar.bz2"
+      yasm: "https://mirror.0x0.ninja/software/yasm/yasm-{{ software.ffmpeg.dep.yasm }}.tar.gz"
+      libogg: "https://mirror.0x0.ninja/software/libogg/libogg-{{ software.ffmpeg.dep.libogg }}.tar.gz"
+      libopus: "https://mirror.0x0.ninja/software/libopus/opus-{{ software.ffmpeg.dep.libopus }}.tar.gz"
+      libvorbis: "https://mirror.0x0.ninja/software/libvorbis/libvorbis-{{ software.ffmpeg.dep.libvorbis }}.tar.gz"
+      libvpx: "https://mirror.0x0.ninja/software/libvpx/libvpx-{{ software.ffmpeg.dep.libvpx }}.tar.bz2"
       libx264: "http://git.videolan.org/git/x264.git"
   imagemagick:
-    url: "http://mirror.jii.moe/software/imagemagick/ImageMagick-{{ software.imagemagick.version }}.tar.gz"
+    url: "https://mirror.0x0.ninja/software/imagemagick/ImageMagick-{{ software.imagemagick.version }}.tar.gz"
   geoip:
-    url: "http://mirror.jii.moe/software/geoip/GeoIP-{{ software.geoip.version }}.tar.gz"
+    url: "https://mirror.0x0.ninja/software/geoip/GeoIP-{{ software.geoip.version }}.tar.gz"
   kafka:
-    url: "http://mirror.jii.moe/software/kafka/kafka_{{ software.kafka.scala }}-{{ software.kafka.version }}.tgz"
+    url: "https://mirror.0x0.ninja/software/kafka/kafka_{{ software.kafka.scala }}-{{ software.kafka.version }}.tgz"
   mozjpeg:
-    url: "http://mirror.jii.moe/software/mozjpeg/mozjpeg-{{ software.mozjpeg.version }}.tar.gz"
+    url: "https://mirror.0x0.ninja/software/mozjpeg/mozjpeg-{{ software.mozjpeg.version }}.tar.gz"
   nodejs:
-    url: "http://mirror.jii.moe/software/nodejs/node-v{{ software.nodejs.version }}.tar.xz"
+    url: "https://mirror.0x0.ninja/software/nodejs/node-v{{ software.nodejs.version }}.tar.xz"
   php:
-    url: "http://mirror.jii.moe/software/php/php-{{ software.php.version }}.tar.gz"
+    url: "https://mirror.0x0.ninja/software/php/php-{{ software.php.version }}.tar.gz"
   scala:
-    url: "http://mirror.jii.moe/software/scala/scala-{{ software.scala.version }}.deb"
+    url: "https://mirror.0x0.ninja/software/scala/scala-{{ software.scala.version }}.deb"
   redis:
-    url: "http://mirror.jii.moe/software/redis/redis-{{ software.redis.version }}.tar.gz"
+    url: "https://mirror.0x0.ninja/software/redis/redis-{{ software.redis.version }}.tar.gz"
   sphinxsearch:
-    url: "http://mirror.jii.moe/software/sphinxsearch/sphinx-{{ software.sphinxsearch.version }}-release.tar.gz"
+    url: "https://mirror.0x0.ninja/software/sphinxsearch/sphinx-{{ software.sphinxsearch.version }}-release.tar.gz"
   vips:
-    url: "http://mirror.jii.moe/software/vips/vips-{{ software.vips.version }}.tar.gz"
+    url: "https://mirror.0x0.ninja/software/vips/vips-{{ software.vips.version }}.tar.gz"
     dep:
-      libwebp: "http://mirror.jii.moe/software/libwebp/libwebp-{{ software.vips.dep.libwebp }}.tar.gz"
+      libwebp: "https://mirror.0x0.ninja/software/libwebp/libwebp-{{ software.vips.dep.libwebp }}.tar.gz"
   zopfli:
-    url: "http://mirror.jii.moe/software/zopfli/zopfli-{{ software.zopfli.version }}.zip"
+    url: "https://mirror.0x0.ninja/software/zopfli/zopfli-{{ software.zopfli.version }}.zip"
