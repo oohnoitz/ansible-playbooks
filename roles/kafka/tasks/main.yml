@@ -14,7 +14,6 @@
     - libjansi-java
     - libssl-dev
     - libsasl2-dev
-    - liblz4-dev
   when: result.stdout != "0"
 
 - name: librdkafka | clone
