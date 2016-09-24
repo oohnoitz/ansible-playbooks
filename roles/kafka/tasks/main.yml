@@ -16,8 +16,16 @@
     - libsasl2-dev
   when: result.stdout != "0"
 
+- name: clean up
+  command: rm -rf {{ item}}
+  with_items:
+    - /tmp/{{ download.scala.url | basename }}
+    - /tmp/{{ download.kafka.url | basename }}
+    - /tmp/librdkafka
+  when: result.stdout != "0"
+
 - name: librdkafka | clone
-  git: repo={{ download.kafka.dep.librdkafka }} force=yes dest=/tmp/librdkafka
+  git: repo={{ download.kafka.dep.librdkafka }} force=dest=/tmp/librdkafka
   when: result.stdout != "0"
 
 - name: librdkafka | configure
@@ -59,4 +67,5 @@
   with_items:
     - /tmp/{{ download.scala.url | basename }}
     - /tmp/{{ download.kafka.url | basename }}
+    - /tmp/librdkafka
   when: result.stdout != "0"
