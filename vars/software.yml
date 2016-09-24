@@ -45,43 +45,43 @@ software:
 
 download:
   bind:
-    url: "https://mirror.0x0.ninja/software/bind/bind-{{ software.bind.version }}.tar.gz"
+    url: "https://files.0x0.ninja/software/bind/bind-{{ software.bind.version }}.tar.gz"
   cassandra:
-    url: "https://mirror.0x0.ninja/software/cassandra/apache-cassandra-{{ software.cassandra.version }}-bin.tar.gz"
+    url: "https://files.0x0.ninja/software/cassandra/apache-cassandra-{{ software.cassandra.version }}-bin.tar.gz"
   elasticsearch:
-    url: "https://mirror.0x0.ninja/software/elasticsearch/elasticsearch-{{ software.elasticsearch.version }}.tar.gz"
+    url: "https://files.0x0.ninja/software/elasticsearch/elasticsearch-{{ software.elasticsearch.version }}.tar.gz"
   ffmpeg:
-    url: "https://mirror.0x0.ninja/software/ffmpeg/ffmpeg-{{ software.ffmpeg.version }}.tar.gz"
+    url: "https://files.0x0.ninja/software/ffmpeg/ffmpeg-{{ software.ffmpeg.version }}.tar.gz"
     dep:
-      yasm: "https://mirror.0x0.ninja/software/yasm/yasm-{{ software.ffmpeg.dep.yasm }}.tar.gz"
-      libogg: "https://mirror.0x0.ninja/software/libogg/libogg-{{ software.ffmpeg.dep.libogg }}.tar.gz"
-      libopus: "https://mirror.0x0.ninja/software/libopus/opus-{{ software.ffmpeg.dep.libopus }}.tar.gz"
-      libvorbis: "https://mirror.0x0.ninja/software/libvorbis/libvorbis-{{ software.ffmpeg.dep.libvorbis }}.tar.gz"
-      libvpx: "https://mirror.0x0.ninja/software/libvpx/libvpx-{{ software.ffmpeg.dep.libvpx }}.tar.bz2"
+      yasm: "https://files.0x0.ninja/software/yasm/yasm-{{ software.ffmpeg.dep.yasm }}.tar.gz"
+      libogg: "https://files.0x0.ninja/software/libogg/libogg-{{ software.ffmpeg.dep.libogg }}.tar.gz"
+      libopus: "https://files.0x0.ninja/software/libopus/opus-{{ software.ffmpeg.dep.libopus }}.tar.gz"
+      libvorbis: "https://files.0x0.ninja/software/libvorbis/libvorbis-{{ software.ffmpeg.dep.libvorbis }}.tar.gz"
+      libvpx: "https://files.0x0.ninja/software/libvpx/libvpx-{{ software.ffmpeg.dep.libvpx }}.tar.bz2"
       libx264: "http://git.videolan.org/git/x264.git"
   imagemagick:
-    url: "https://mirror.0x0.ninja/software/imagemagick/ImageMagick-{{ software.imagemagick.version }}.tar.gz"
+    url: "https://files.0x0.ninja/software/imagemagick/ImageMagick-{{ software.imagemagick.version }}.tar.gz"
   geoip:
-    url: "https://mirror.0x0.ninja/software/geoip/GeoIP-{{ software.geoip.version }}.tar.gz"
+    url: "https://files.0x0.ninja/software/geoip/GeoIP-{{ software.geoip.version }}.tar.gz"
   kafka:
-    url: "https://mirror.0x0.ninja/software/kafka/kafka_{{ software.kafka.scala }}-{{ software.kafka.version }}.tgz"
+    url: "https://files.0x0.ninja/software/kafka/kafka_{{ software.kafka.scala }}-{{ software.kafka.version }}.tgz"
     dep:
       librdkafka: "https://github.com/edenhill/librdkafka.git"
   mozjpeg:
-    url: "https://mirror.0x0.ninja/software/mozjpeg/mozjpeg-{{ software.mozjpeg.version }}.tar.gz"
+    url: "https://files.0x0.ninja/software/mozjpeg/mozjpeg-{{ software.mozjpeg.version }}.tar.gz"
   nodejs:
-    url: "https://mirror.0x0.ninja/software/nodejs/node-v{{ software.nodejs.version }}.tar.xz"
+    url: "https://files.0x0.ninja/software/nodejs/node-v{{ software.nodejs.version }}.tar.xz"
   php:
-    url: "https://mirror.0x0.ninja/software/php/php-{{ software.php.version }}.tar.gz"
+    url: "https://files.0x0.ninja/software/php/php-{{ software.php.version }}.tar.gz"
   scala:
-    url: "https://mirror.0x0.ninja/software/scala/scala-{{ software.scala.version }}.deb"
+    url: "https://files.0x0.ninja/software/scala/scala-{{ software.scala.version }}.deb"
   redis:
-    url: "https://mirror.0x0.ninja/software/redis/redis-{{ software.redis.version }}.tar.gz"
+    url: "https://files.0x0.ninja/software/redis/redis-{{ software.redis.version }}.tar.gz"
   sphinxsearch:
-    url: "https://mirror.0x0.ninja/software/sphinxsearch/sphinx-{{ software.sphinxsearch.version }}-release.tar.gz"
+    url: "https://files.0x0.ninja/software/sphinxsearch/sphinx-{{ software.sphinxsearch.version }}-release.tar.gz"
   vips:
-    url: "https://mirror.0x0.ninja/software/vips/vips-{{ software.vips.version }}.tar.gz"
+    url: "https://files.0x0.ninja/software/vips/vips-{{ software.vips.version }}.tar.gz"
     dep:
-      libwebp: "https://mirror.0x0.ninja/software/libwebp/libwebp-{{ software.vips.dep.libwebp }}.tar.gz"
+      libwebp: "https://files.0x0.ninja/software/libwebp/libwebp-{{ software.vips.dep.libwebp }}.tar.gz"
   zopfli:
-    url: "https://mirror.0x0.ninja/software/zopfli/zopfli-{{ software.zopfli.version }}.zip"
+    url: "https://files.0x0.ninja/software/zopfli/zopfli-{{ software.zopfli.version }}.zip"
