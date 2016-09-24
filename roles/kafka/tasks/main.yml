@@ -25,7 +25,7 @@
   when: result.stdout != "0"
 
 - name: librdkafka | clone
-  git: repo={{ download.kafka.dep.librdkafka }} force=dest=/tmp/librdkafka
+  git: repo={{ download.kafka.dep.librdkafka }} dest=/tmp/librdkafka
   when: result.stdout != "0"
 
 - name: librdkafka | configure
