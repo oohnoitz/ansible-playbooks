@@ -12,13 +12,34 @@
     - libhawtjni-runtime-java
     - libjansi-native-java
     - libjansi-java
+    - libssl-dev
+    - libsasl2-dev
+    - liblz4-dev
   when: result.stdout != "0"
 
-- name: download scala-lang
+- name: librdkafka | clone
+  git: repo={{ download.kafka.dep.librdkafka }} dest=/tmp/librdkafka
+  when: result.rc != 0
+
+- name: librdkafka | configure
+  command: ./configure chdir=/tmp/librdkafka
+  when: result.rc != 0
+
+- name: librdkafka | make
+  command: make -j{{ ansible_processor_cores }} chdir=/tmp/librdkafka
+  when: result.rc != 0
+
+- name: librdkafka | make install
+  command: make install chdir=/tmp/librdkafka
+  when: result.rc != 0
+  notify:
+    - run ldconfig
+
+- name: scala-lang | download
   get_url: url={{ download.scala.url }} dest=/tmp/{{ download.scala.url | basename }}
   when: result.stdout != "0"
 
-- name: install scala-lang
+- name: scala-lang | install
   apt: deb=/tmp/{{ download.scala.url | basename }}
   when: result.stdout != "0"
 
