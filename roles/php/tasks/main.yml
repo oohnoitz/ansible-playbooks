@@ -31,7 +31,7 @@
   when: result.rc != 0 or result.stdout.split()[1] != software.php.version
 
 - name: configure
-  command: ./configure --enable-fpm --enable-zip --enable-sockets --with-pdo-mysql --with-mysqli --with-mysql --with-gettext --with-gd --enable-ftp --enable-exif --with-curl --with-bz2 --with-openssl --with-mcrypt --enable-mbstring --with-jpeg-dir --with-png-dir --with-zlib --enable-bcmath --enable-intl chdir=/tmp/php-{{ software.php.version }}
+  command: ./configure --enable-fpm --enable-zip --enable-sockets --with-pdo-mysql --with-mysqli --with-gettext --with-gd --enable-ftp --enable-exif --with-curl --with-bz2 --with-openssl --with-mcrypt --enable-mbstring --with-jpeg-dir --with-png-dir --with-zlib --enable-bcmath --enable-intl chdir=/tmp/php-{{ software.php.version }}
   when: result.rc != 0 or result.stdout.split()[1] != software.php.version
 
 - name: make
