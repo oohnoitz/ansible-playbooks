@@ -24,24 +24,6 @@
     - /tmp/librdkafka
   when: result.stdout != "0"
 
-- name: librdkafka | clone
-  git: repo={{ download.kafka.dep.librdkafka }} dest=/tmp/librdkafka
-  when: result.stdout != "0"
-
-- name: librdkafka | configure
-  command: ./configure chdir=/tmp/librdkafka
-  when: result.stdout != "0"
-
-- name: librdkafka | make
-  command: make -j{{ ansible_processor_cores }} chdir=/tmp/librdkafka
-  when: result.stdout != "0"
-
-- name: librdkafka | make install
-  command: make install chdir=/tmp/librdkafka
-  when: result.stdout != "0"
-  notify:
-    - run ldconfig
-
 - name: scala-lang | download
   get_url: url={{ download.scala.url }} dest=/tmp/{{ download.scala.url | basename }}
   when: result.stdout != "0"
@@ -67,5 +49,4 @@
   with_items:
     - /tmp/{{ download.scala.url | basename }}
     - /tmp/{{ download.kafka.url | basename }}
-    - /tmp/librdkafka
   when: result.stdout != "0"
